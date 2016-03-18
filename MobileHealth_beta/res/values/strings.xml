@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MobileHealth</string>
+    
+    <string name="action_settings">settings</string>
+    <string name="me_health_plan">健康方案</string>
+    <string name="me_excption">异常记录</string>
+    <string name="me_data_record">数据记录</string>
+    <string name="me_health_knowledge">统计数据</string>
+    <string name="me_person_data">设置</string>
+    <string name="start_app">Start application:</string>
+    <string name="action_add">添加</string>
+    <string name="action_search">查找</string>
+    <string name="menu_group_chat">发起群聊</string>
+    <string name="menu_feedback">意见反馈</string>
+    <string name="menu_addfriend">添加朋友</string>
+     <string name="tab_me">我</string>
+    <string name="menu_scan">扫一扫</string>
+    <string name="tab_action">运动</string>
+    <string name="tab_heartrate">心率</string>
+    <string name="tab_position">位置</string>
+    <string name="tab_more">更多</string>
+     <string name="contentDescription">menu</string>
+    
+    
+</resources>

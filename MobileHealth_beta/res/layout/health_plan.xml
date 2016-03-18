@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+<RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="#99ccff">
+
+        <TextView
+           
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="25sp" 
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:text="健康报告" />
+
+        <ImageButton
+            android:id="@+id/plan_back"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/abc_ic_ab_back_holo_dark" />
+
+    </RelativeLayout>
+
+<TextView
+    android:id="@+id/health_plan"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:textSize="20sp"
+    android:textColor="#000"
+    android:background="@drawable/plan_bg"
+    android:padding="25dp" />
+
+</LinearLayout>

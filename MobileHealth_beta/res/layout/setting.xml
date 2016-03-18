@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="#ccffff"
+   >
+ <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="#99ccff">
+
+        <TextView
+           
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="25sp" 
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:text="设置" />
+
+        <ImageButton
+            android:id="@+id/setting_back"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/abc_ic_ab_back_holo_dark" />
+
+    </RelativeLayout>
+
+ <ScrollView
+    
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content" >
+
+     
+         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:layout_margin="8dp"
+            android:layout_marginTop="15dp"
+            android:padding="8dp" 
+            android:background="@drawable/layout_bg">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:background="@drawable/corners_bg"
+                android:layout_margin="5dp"
+                android:padding="5dp">
+
+                <ToggleButton
+                    android:id="@+id/setting_toggleButton1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="" />
+
+                <ImageView
+                    android:id="@+id/setting_imageView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/abc_ic_go" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:layout_alignBaseline="@+id/setting_toggleButton1"
+                    android:layout_alignBottom="@+id/setting_toggleButton1"
+                    android:layout_toRightOf="@+id/setting_imageView1"
+                    android:text="wifi下自动上传数据" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/corners_bg"
+                android:layout_margin="5dp"
+                android:padding="5dp"
+                >
+
+                <ToggleButton
+                    android:id="@+id/setting_toggleButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="ToggleButton" />
+
+                <ImageView
+                    android:id="@+id/setting_imageView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/abc_ic_go" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:layout_alignBaseline="@+id/setting_toggleButton2"
+                    android:layout_alignBottom="@+id/setting_toggleButton2"
+                    android:layout_toRightOf="@+id/setting_imageView2"
+                    android:text="上传数据自动删除" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:background="@drawable/corners_bg"
+                android:layout_margin="5dp"
+                android:padding="5dp">
+
+                <ToggleButton
+                    android:id="@+id/setting_toggleButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="ToggleButton" />
+
+                <ImageView
+                    android:id="@+id/setting_imageView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/abc_ic_go" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:layout_alignBaseline="@+id/setting_toggleButton3"
+                    android:layout_alignBottom="@+id/setting_toggleButton3"
+                    android:layout_toRightOf="@+id/setting_imageView3"
+                    android:text="接收健康报告推送" />
+
+            </RelativeLayout> 
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:background="@drawable/corners_bg"
+                android:layout_margin="5dp"
+                android:padding="5dp">
+
+                <ToggleButton
+                    android:id="@+id/setting_toggleButton4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="ToggleButton" />
+
+                <ImageView
+                    android:id="@+id/setting_imageView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/abc_ic_go" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:layout_alignBaseline="@+id/setting_toggleButton4"
+                    android:layout_alignBottom="@+id/setting_toggleButton4"
+                    android:layout_toRightOf="@+id/setting_imageView4"
+                    android:text="自动启动运动监测" />
+
+            </RelativeLayout> 
+            
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:background="@drawable/corners_bg"
+                android:layout_margin="5dp"
+                android:padding="5dp">
+
+                <ToggleButton
+                    android:id="@+id/setting_toggleButton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="ToggleButton" />
+
+                <ImageView
+                    android:id="@+id/setting_imageView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="8dp"
+                    android:src="@drawable/abc_ic_go" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:textSize="16sp"
+                    android:layout_alignBaseline="@+id/setting_toggleButton5"
+                    android:layout_alignBottom="@+id/setting_toggleButton5"
+                    android:layout_toRightOf="@+id/setting_imageView5"
+                    android:text="自动启动位置服务" />
+
+            </RelativeLayout> 
+            
+            <Button
+            android:id="@+id/setting_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corners_bg"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:layout_gravity="right"
+            android:text="上传本机数据" />
+
+        <Button
+            android:id="@+id/setting_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/corners_bg"
+            android:layout_gravity="right"
+            android:layout_margin="5dp"
+            android:padding="5dp"
+            android:textSize="16sp"
+            android:text="删除本机数据" />
+      
+     </LinearLayout>
+     
+ </ScrollView>
+   
+        
+
+        
+
+</LinearLayout>

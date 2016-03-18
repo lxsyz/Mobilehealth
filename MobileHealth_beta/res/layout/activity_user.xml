@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/my_lightgray"
+    android:orientation="vertical" >
+       
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="#0098CA">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+	        android:layout_height="70dp"
+	        android:gravity="center_horizontal"
+	        android:paddingTop="30dp"
+	        android:textColor="#ffffff"
+	        android:textSize="25sp"
+	        android:textStyle="bold"
+            android:text="个人信息" />
+        
+        <ImageView
+            android:id="@+id/edit_userinfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+			android:paddingTop="33dp"
+			android:layout_marginRight="8dp"
+            android:src="@drawable/edit2" />
+
+    </RelativeLayout>
+
+   
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/my_lightgray" />
+        
+	<ScrollView 
+	    android:layout_width="match_parent"
+    	android:layout_height="match_parent"
+    	android:background="#f8f8f8">
+	    
+		<LinearLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:orientation="vertical" >
+			
+		    <RelativeLayout 
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        android:layout_height="43dp">
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="用户名"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_name"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+		    
+		    
+		    
+		    <RelativeLayout 
+		        android:layout_height="43dp"
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        >
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="省份"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_province"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+		    
+		    <RelativeLayout 
+		        android:layout_height="43dp"
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        >
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="城市"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_city"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+		    
+		    <RelativeLayout 
+		        android:layout_height="43dp"
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        >
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="性别"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_sex"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+		    
+		    <RelativeLayout 
+		        android:layout_height="43dp"
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        >
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="职业"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_work"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+		    
+		    <RelativeLayout 
+		        android:layout_height="43dp"
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        >
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="身高"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_height"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+		    
+		    <RelativeLayout 
+		        android:layout_height="43dp"
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        >
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="体重"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_weight"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+		    
+		    <RelativeLayout 
+		        android:layout_height="43dp"
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        >
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="生日"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_birthday"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+		    
+		    <RelativeLayout 
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        android:layout_height="43dp">
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="电话号码"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_phonenum"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+		    
+		    <RelativeLayout 
+		        android:paddingLeft="15dp"
+            	android:paddingRight="20dp"
+		        android:background="@color/white"
+		        android:layout_width="match_parent"
+		        android:layout_height="43dp">
+		        
+		        <TextView
+	                style="@style/showstyle"
+	                android:text="注册时间"
+	                />
+		        
+		        <View android:layout_height="1dp"
+		            android:background="#FAF0E6"
+		            android:layout_width="match_parent"
+		            android:layout_alignParentBottom="true"/>
+		        
+		        <TextView 
+		            android:id="@+id/userinfo_registertime"
+		            style="@style/anotherShowstyle"
+		            />
+		    </RelativeLayout>
+			<TextView
+			    android:id="@+id/changePwd"
+			    android:text="修改密码" 
+			    android:textSize="19dp"
+			    android:clickable="true"
+			    android:background="#ffffff"
+				android:textColor="#000000"
+				android:gravity="center"
+			    android:layout_height="60dp"
+			    android:layout_marginTop="9dp"
+			    android:layout_width="match_parent"
+			    android:layout_marginBottom="0dp"/>
+		</LinearLayout>
+	</ScrollView>
+</LinearLayout>

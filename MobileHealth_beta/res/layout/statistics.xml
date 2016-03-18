@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#ccffff" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="#99ccff">
+
+        <TextView
+           
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:textSize="25sp" 
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:textColor="#ffffff"
+            android:text="运动统计" />
+
+        <ImageButton
+            android:id="@+id/sta_back"
+            android:layout_width="40dp"
+            android:layout_height="45dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/abc_ic_ab_back_holo_dark" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+            <CalendarView
+        android:id="@+id/sta_calendarView"
+        android:layout_width="250dp"
+        android:layout_height="180dp"
+        android:layout_gravity="center"
+        android:background="@drawable/layout_bg"
+        android:focusedMonthDateColor="#ff0000"
+        android:padding="5dp"
+        android:layout_marginTop="10dp"
+       
+        android:showWeekNumber="false"
+        
+   
+        android:weekSeparatorLineColor="#000000" />
+            
+            <com.github.mikephil.charting.charts.PieChart
+
+			android:id="@+id/spread_pie_chart"
+			android:layout_marginTop="20dp"
+			android:layout_width="match_parent"
+
+			android:layout_height="320dip" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:padding="15dp"
+         >
+
+        <TableRow
+            
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text="今日总步数:" />
+
+            <TextView
+                android:id="@+id/sta_stepCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:text=""
+                />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+               
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="今日安静总时间:" 
+                android:textColor="#000"
+                />
+
+            <TextView
+                android:id="@+id/sta_sitCount"
+                android:layout_marginLeft="10dp"
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text=""
+                 />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+             <TextView
+               android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="今日行走总时间:" />
+
+            <TextView
+                android:textSize="18sp"
+                android:id="@+id/sta_walkCount"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text=""
+                 />
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+             <TextView
+               android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="今日跑步总时间:" />
+
+            <TextView
+                android:textSize="18sp"
+                android:id="@+id/sta_runCount"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text=""
+                 />
+        </TableRow>
+        <TableRow
+           android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+             <TextView
+               android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="今日下楼总时间:" />
+
+            <TextView
+                android:textSize="18sp"
+                android:id="@+id/sta_downCount"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text=""
+                 />
+        </TableRow>
+        <TableRow
+           android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+             <TextView
+                android:textSize="18sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="今日上楼总时间:" />
+
+            <TextView
+                android:textSize="18sp"
+                android:id="@+id/sta_upCount"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text=""
+                 />
+        </TableRow>
+    </TableLayout>
+       
+        </LinearLayout>
+    </ScrollView>
+    
+    
+</LinearLayout>

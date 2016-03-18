@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#272955" >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+	        android:layout_height="70dp"
+	        android:gravity="center_horizontal"
+	        android:paddingTop="30dp"
+	        android:text="睡眠"
+	        android:textColor="#ffffff"
+	        android:textSize="25sp"
+	        android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/choose_date"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/choose_date" />
+    </RelativeLayout>
+
+       <LinearLayout
+           android:layout_width="fill_parent"
+           android:layout_height="0dp"
+           android:layout_weight="4"
+           android:orientation="vertical" >
+
+                <com.bbcc.mobilehealth.view.MyHorizontalScrollView
+                    android:id="@+id/listview"
+                    android:background="#fbf7fb"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:scrollbars="none"
+                     >
+					<LinearLayout
+			            android:id="@+id/id_gallery"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_gravity="center_vertical"
+			            android:orientation="horizontal" >
+			        </LinearLayout>
+        		</com.bbcc.mobilehealth.view.MyHorizontalScrollView>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="#ffffff"
+                    android:orientation="horizontal" >
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp" >
+
+                        <TextView
+                            android:id="@+id/sleepTimeText"
+                            android:text="睡眠时长"
+                            style="@style/sleepText" />
+
+                        <TextView
+                            android:id="@+id/sleepTime"
+                            android:layout_below="@+id/sleepTimeText"
+                            android:text="9小时"
+                            style="@style/sleepData" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp" >
+
+                        <TextView
+                            android:id="@+id/deepsleeptext"
+                            android:text="深睡时长"
+                            style="@style/sleepText" />
+
+                        <TextView
+                            android:id="@+id/deepsleep"
+                            android:layout_below="@+id/deepsleeptext"
+                            android:text="9小时"
+                            style="@style/sleepData" />
+                    </RelativeLayout>
+                    
+                    <RelativeLayout
+                        android:layout_marginTop="4dp"  
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        
+                        <TextView
+                            android:id="@+id/qianshuiText"
+                            android:text="浅睡时长"
+                            style="@style/sleepText" />
+
+                        <TextView
+                            android:id="@+id/qiansleep"
+                            android:layout_below="@+id/qianshuiText"
+                            android:text="9小时"
+                            style="@style/sleepData" />
+                        
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="5"
+                    android:background="#ffffff"
+                    android:orientation="horizontal" >
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                         >
+
+                        <TextView
+                            android:id="@+id/rushuiText"
+                            android:text="入睡时间"
+                            style="@style/sleepTextDown" />
+
+                        <TextView
+                            android:id="@+id/rushuiTime"
+                            android:layout_below="@+id/rushuiText"
+                            android:text="9小时"
+                            style="@style/sleepDataDown" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                         >
+
+                        <TextView
+                            android:id="@+id/xinglaiText"
+                            android:text="醒来时间"
+                            style="@style/sleepTextDown" />
+
+                        <TextView
+                            android:id="@+id/xinglaiTime"
+                            android:layout_below="@+id/xinglaiText"
+                            android:text="9小时"
+                            style="@style/sleepDataDown" />
+                    </RelativeLayout>
+                    
+                    <RelativeLayout 
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        
+                        <TextView
+                            android:id="@+id/qingxingText"
+                            style="@style/sleepTextDown"
+                            android:text="清醒时长" />
+
+                        <TextView
+                            android:id="@+id/qingxingTime"
+                            android:layout_below="@+id/qingxingText"
+                            android:text="9小时"
+                            style="@style/sleepDataDown" />
+                        
+                    </RelativeLayout>
+                </LinearLayout>
+        </LinearLayout>
+    
+
+</LinearLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/my_lightgray"
+    android:orientation="vertical" >
+    
+    <com.bbcc.mobilehealth.view.ClearEditText
+        android:id="@+id/pwd"
+        android:layout_marginTop="60dp"
+        android:layout_width="fill_parent"
+        android:drawableLeft="@drawable/icon_user"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="8dp"
+         android:background="#ffffff"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="原始密码"
+         
+        android:layout_height="wrap_content" >
+
+    </com.bbcc.mobilehealth.view.ClearEditText>
+    
+
+    <com.bbcc.mobilehealth.view.ClearEditText
+        android:id="@+id/new_password"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="8dp"
+        android:layout_marginTop="18dp"
+         android:background="#ffffff"
+        android:drawableLeft="@drawable/account_icon"
+        android:hint="新密码"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:drawableRight="@drawable/delete_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+         >
+    </com.bbcc.mobilehealth.view.ClearEditText>
+     <com.bbcc.mobilehealth.view.ClearEditText
+        android:id="@+id/sure_new_password"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="8dp"
+        android:layout_marginTop="18dp"
+           android:background="#ffffff"
+        android:drawableLeft="@drawable/account_icon"
+        android:hint="确认密码"
+        android:singleLine="true"
+        android:inputType="textPassword"
+        android:drawableRight="@drawable/delete_selector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+         >
+    </com.bbcc.mobilehealth.view.ClearEditText>
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="8dp"
+        android:background="@drawable/yuanjiao"
+        android:textSize="20sp"
+        
+        android:textColor="@android:color/white"        
+        android:layout_marginTop="25dp"
+        android:text="确定" />
+
+</LinearLayout>

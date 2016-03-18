@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical" >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:background="@color/my_lightgray" />
+
+    <LinearLayout
+        android:id="@+id/homepage_item1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/homepage_item_personal" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp" >
+
+            <TextView
+                android:id="@+id/login"
+                style="@style/homepage_item_textview1"
+                android:text="登录/注册" />
+
+            <TextView
+                style="@style/homepage_item_textview2"
+                android:text="登陆后可查看健康报告" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="60dp"
+        android:background="@color/darkgray" />
+
+    <LinearLayout
+        android:id="@+id/homepage_item2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/homepage_item_heartrate1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp" >
+
+            <TextView
+                style="@style/homepage_item_textview1"
+                android:text="心率记录" />
+
+            <TextView
+                style="@style/homepage_item_textview2"
+                android:text="可以查看最近心率记录" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="17dp"
+        android:background="@color/my_lightgray" />
+
+    <LinearLayout
+        android:id="@+id/homepage_item3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/homepage_item_record" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp" >
+
+            <TextView
+                style="@style/homepage_item_textview1"
+                android:text="运动记录" />
+
+            <TextView
+                style="@style/homepage_item_textview2"
+                android:text="可以查看最近运动记录" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="60dp"
+        android:background="@color/darkgray" />
+
+    <LinearLayout
+        android:id="@+id/homepage_item4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/homepage_item_excaption" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp" >
+
+            <TextView
+                style="@style/homepage_item_textview1"
+                android:text="异常记录" />
+
+            <TextView
+                style="@style/homepage_item_textview2"
+                android:text="可查看心率异常" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="60dp"
+        android:background="@color/darkgray" />
+
+    <LinearLayout
+        android:id="@+id/homepage_item5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/edit_indicator" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="20dp" >
+
+            <TextView
+                style="@style/homepage_item_textview1"
+                android:text="运动记录" />
+
+            <TextView
+                style="@style/homepage_item_textview2"
+                android:text="可以查看最近运动记录" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="17dp"
+        android:background="@color/my_lightgray" />
+
+</LinearLayout>

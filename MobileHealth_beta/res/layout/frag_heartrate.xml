@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res/com.bbcc.mobilehealth.view.ProcessView"
+    android:id="@+id/frag_heartrate_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white" >
+
+    <TextView
+        android:id="@+id/heartrate_title_textview"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:background="@color/main_color2"
+        android:gravity="center_horizontal"
+        android:paddingTop="30dp"
+        android:text="心率"
+        android:textColor="#ffffff"
+        android:textSize="25sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/heartrate_show_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"
+        android:layout_marginLeft="100dp"
+        android:gravity="center"
+        android:textColor="@color/heartrate_curve"
+        android:textSize="39sp" />
+
+    <LinearLayout
+        android:id="@+id/heartrate_circle_main"
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/heartrate_circle"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:id="@+id/heartrate_circle_textview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="点我"
+                android:textColor="@color/black"
+                android:textSize="30sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="连接MIO手环"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <com.bbcc.mobilehealth.view.ProcessView
+            android:id="@+id/heartrate_circle_processview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/heartrate_circle_textview2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="匹配成功"
+            android:textSize="25sp"
+            android:visibility="gone" />
+    </LinearLayout>
+
+        <com.bbcc.mobilehealth.view.DrawChart
+            android:id="@+id/heartrate_circle_drawchart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="260dp"
+            android:visibility="gone" />
+
+</RelativeLayout>

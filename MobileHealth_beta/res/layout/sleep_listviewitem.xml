@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/sleep_bg"
+    android:orientation="vertical" >
+
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="12">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:paddingLeft="1dp"
+        android:paddingRight="1dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentBottom="true"
+        android:paddingTop="15dp"
+        >
+
+       
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="300dp"
+            android:layout_gravity="center" >
+
+            <TextView
+                android:id="@+id/qian_values_btn"
+                android:layout_width="35dp"
+                android:layout_height="100dp"
+                android:layout_above="@+id/deep_values_btn"
+                android:background="@color/qiansleep" />
+            
+            <TextView
+                android:id="@+id/deep_values_btn"
+                android:layout_width="35dp"
+                android:layout_height="200dp"
+                android:layout_alignParentBottom="true"
+                android:background="@color/deepsleep" />
+
+            <ImageView
+                android:visibility="gone"
+                android:id="@+id/sanjiao"
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="-14dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/sanjiao" />
+
+        </RelativeLayout>
+        
+    </RelativeLayout>
+    
+</RelativeLayout>
+    <LinearLayout
+        
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#fbf7fb"
+        android:orientation="vertical" >
+
+        
+        <TextView
+            android:id="@+id/textview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="0dp"
+            android:gravity="center"
+            android:textColor="#bbbbbb"
+            android:text=""
+            android:textSize="11sp" />
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@color/my_lightgray"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:background="#0098CA">
+        
+        <ImageView 
+            android:id="@+id/bt_left"
+            android:paddingTop="30dp"
+		    android:layout_width="wrap_content"
+		    android:layout_height="70dp"
+		    android:layout_alignParentLeft="true"
+		    android:src="@drawable/arrow_back"
+		    android:textColor="#ffffff"
+		    android:textSize="22sp"
+		    android:textStyle="bold"/>
+        
+		<TextView
+	        android:id="@+id/title"
+	        android:layout_width="match_parent"
+	        android:layout_height="70dp"
+	        android:gravity="center_horizontal"
+	        android:paddingTop="30dp"
+	        android:text=""
+	        android:textColor="#ffffff"
+	        android:textSize="25sp"
+	        android:textStyle="bold" />
+
+		<TextView
+		    android:id="@+id/bt_right"
+		    android:paddingTop="30dp"
+		    android:layout_width="wrap_content"
+		    android:layout_height="70dp"
+		    android:layout_alignParentRight="true"
+		    android:text="确定"
+		    android:textColor="#ffffff"
+		    android:textSize="22sp"
+		    android:textStyle="bold" />
+
+	</RelativeLayout>
+    
+    <TextView
+        android:id="@+id/edit_tv"
+        android:layout_width="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="#858585"
+        android:layout_height="30dp" />
+	
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <EditText
+            android:id="@+id/edit_ed"
+            android:layout_width="match_parent"
+            android:background="@drawable/boder"
+            android:layout_height="47dp"
+            android:gravity="center_vertical"
+            
+            android:paddingLeft="15dp"
+            android:textSize="16sp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/black" 
+            />
+    </LinearLayout>
+
+</LinearLayout>

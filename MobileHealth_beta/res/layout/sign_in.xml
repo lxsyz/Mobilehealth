@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/my_lightgray"
+    android:orientation="vertical"
+    android:padding="8dp" >
+
+    <com.bbcc.mobilehealth.view.ClearEditText
+        android:id="@+id/in_username"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="8dp"
+        android:background="#CCC8CD"
+        android:layout_marginTop="60dp"
+        android:drawableLeft="@drawable/icon_user"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="手机号"
+        android:inputType="phone"
+        android:singleLine="true" >
+    </com.bbcc.mobilehealth.view.ClearEditText>
+
+    <com.bbcc.mobilehealth.view.ClearEditText
+        android:id="@+id/in_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="8dp"
+         android:background="#CCC8CD"
+        android:layout_marginTop="25dp"
+       
+        android:drawableLeft="@drawable/account_icon"
+        android:drawableRight="@drawable/delete_selector"
+        android:hint="密码"
+        android:inputType="textPassword"
+        android:singleLine="true" >
+    </com.bbcc.mobilehealth.view.ClearEditText>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp" >
+
+        <TextView
+            android:id="@+id/in_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:text="收起"
+            android:textColor="#0000ff"
+            android:textSize="15sp"
+            android:visibility="gone"
+             />
+
+        <TextView
+            android:id="@+id/in_forget_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="18dp"
+            android:text="忘记密码"
+            android:textColor="#1BB7F0"
+            android:textSize="15sp" 
+            />
+    </RelativeLayout>
+      <Spinner
+            android:id="@+id/in_spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+             />
+    <RelativeLayout
+        android:id="@+id/in_layout_findpasswordbyemail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+         >
+        
+        <com.bbcc.mobilehealth.view.ClearEditText
+            android:id="@+id/findpassword_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/in_bt_findpasswordbyemail"
+            android:layout_marginLeft="15dp"
+            android:drawableLeft="@drawable/icon_email"
+            android:drawableRight="@drawable/delete_selector"
+            android:hint="email"
+            android:padding="5dp"
+            android:singleLine="true" >
+
+        </com.bbcc.mobilehealth.view.ClearEditText>
+
+        <Button
+            android:id="@+id/in_bt_findpasswordbyemail"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/findpassword_email"
+            android:layout_marginRight="20dp"
+            android:background="#90ccffcc"
+            android:padding="5dp"
+            android:text="找回密码" />
+
+    </RelativeLayout>
+
+   
+    <Button
+        android:id="@+id/in_sign_in"
+        android:layout_width="fill_parent"
+        android:layout_height="42dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:padding="8dp"
+        android:layout_marginTop="25dp"
+        android:text="登录"
+        android:background="@drawable/yuanjiao"
+        android:textColor="@android:color/white"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/in_sign_up"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="25dp"
+        android:clickable="true"
+        android:text="马上注册"
+        android:textColor="#0000ff"
+        android:textSize="18sp"
+        android:textStyle="italic" />
+
+</LinearLayout>
