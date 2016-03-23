@@ -81,7 +81,7 @@ public class CircleProgressBar extends View {
 		mBackgroundOval = new RectF();
 		mOval = new RectF();
 //		setProgress(mProgress);
-		maxProgress = 1000;// 设置默认最大为1000
+//		maxProgress = 1000;// 璁剧疆榛樿鏈�澶т负1000
 	}
 
 	@Override
@@ -200,6 +200,14 @@ public class CircleProgressBar extends View {
 		}
 		
 		invalidate();
+	}
+
+	public int getMaxProgress() {
+		return maxProgress;
+	}
+
+	public void setMaxProgress(int maxProgress) {
+		this.maxProgress = maxProgress;
 	}
 
 	public void setOnProgressBarChangeListener(

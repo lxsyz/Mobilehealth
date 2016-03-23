@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/heartrate_circle_main"
+    android:layout_width="180dp"
+    android:layout_height="180dp"
+    android:layout_centerInParent="true"
+    android:background="@drawable/heartrate_circle"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/heartrate_circle_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="点我"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:text="连接MIO手环"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <com.bbcc.mobilehealth.view.ProcessView
+        android:id="@+id/heartrate_circle_processview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+  
+    <com.bbcc.mobilehealth.view.CancelView 
+        android:id="@+id/heartrate_circle_cancelview"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

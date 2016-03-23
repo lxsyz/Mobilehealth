@@ -91,7 +91,7 @@ public class UserInfoActivity extends Activity implements OnClickListener{
 		        
 		        if (edit_province_textview.getText()!=null &&(!edit_province_textview.getText().toString().equals(""))) {
 	            	for (int j = 0;j < 34;j++) {
-	            		Log.d("province_textview", edit_province_textview.getText().toString()+" ");
+	            		//Log.d("province_textview", edit_province_textview.getText().toString()+" ");
 	            		if (province[j].equals(edit_province_textview.getText().toString())) {
 	            			id = provinceId[j];
 	            			Message msg = new Message();
@@ -134,8 +134,6 @@ public class UserInfoActivity extends Activity implements OnClickListener{
 			//	edit_phonenumber_textview.setText(model.getPhone()+" ");
 			if (model.getProvince() != null && (!model.getProvince().equals("null")))
 				edit_province_textview.setText(model.getProvince());
-			if (model.getRegisterDate() != null && (!model.getRegisterDate().equals("null")))
-				edit_registertime_textview.setText(model.getRegisterDate()+"");
 			if (model.getWork() != null && (!model.getWork().equals("null")))
 				edit_work_textview.setText(model.getWork()+"");
 		}
@@ -150,7 +148,6 @@ public class UserInfoActivity extends Activity implements OnClickListener{
 		edit_birthday_layout = (RelativeLayout)findViewById(R.id.edit_birthday_name);
 		edit_city_layout = (RelativeLayout)findViewById(R.id.edit_city_name);
 		edit_province_layout = (RelativeLayout)findViewById(R.id.edit_province_name);
-		edit_registertime_layout = (RelativeLayout)findViewById(R.id.edit_registertime_name);
 		edit_work_layout = (RelativeLayout)findViewById(R.id.edit_work_name);
 		//edit_phonenumber_layout = (RelativeLayout)findViewById(R.id.edit_phonenumber_name);
 		
@@ -162,7 +159,6 @@ public class UserInfoActivity extends Activity implements OnClickListener{
 		edit_birthday_textview = (TextView)findViewById(R.id.edit_birthday_textview);
 		edit_city_textview = (TextView)findViewById(R.id.edit_city_textview);
 		edit_province_textview = (TextView)findViewById(R.id.edit_province_textview);
-		edit_registertime_textview = (TextView)findViewById(R.id.edit_registertime_textview);
 		edit_work_textview = (TextView)findViewById(R.id.edit_work_textview);
 		bt_right = (TextView)findViewById(R.id.bt_right);
 		
@@ -173,10 +169,8 @@ public class UserInfoActivity extends Activity implements OnClickListener{
 		edit_birthday_layout.setOnClickListener(this);
 		edit_city_layout.setOnClickListener(this);
 		edit_province_layout.setOnClickListener(this);
-		edit_registertime_layout.setOnClickListener(this);
 		edit_work_layout.setOnClickListener(this);
 		//edit_phonenumber_layout.setOnClickListener(this);
-		edit_registertime_layout.setOnClickListener(this);
 		edit_birthday_layout.setOnClickListener(this);
 		bt_right.setOnClickListener(this);
 	}
@@ -282,8 +276,6 @@ public class UserInfoActivity extends Activity implements OnClickListener{
 //					.putExtra("tips", "请输入您的电话号码")
 //					.putExtra("result", 26), 26);
 //			break;
-		case R.id.edit_registertime_name:
-			break;
 			
 		case R.id.bt_right:
 			pd = new MyDialog(UserInfoActivity.this).loadDialog1();
@@ -392,7 +384,8 @@ public class UserInfoActivity extends Activity implements OnClickListener{
 						//setResult(, data)
 						
 					} else if(res.equals("0")){
-						Toast.makeText(UserInfoActivity.this, "连不上服务器，修改失败",2000).show();
+						Toast.makeText(UserInfoActivity.this, "您没有修改信息",2000).show();
+						UserInfoActivity.this.finish();
 					}
 				} catch (JSONException e) {
 					e.printStackTrace();

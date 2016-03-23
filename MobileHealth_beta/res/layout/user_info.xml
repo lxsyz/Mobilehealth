@@ -198,41 +198,7 @@
 	                android:src="@drawable/arrow_r" />
 		    </RelativeLayout>
 		    
-		    <RelativeLayout 
-		        android:id="@+id/edit_city_name"
-		        android:layout_width="match_parent"
-		        android:layout_height="40dp"
-				android:background="@drawable/item_selector"
-		        android:clickable="true"
-		        android:paddingLeft="15dp"
-		        android:paddingRight="20dp"
-		        >
-		        <TextView 
-		            android:id="@+id/city_text"
-		            android:layout_alignTop="@+id/edit_city_textview"
-		            android:text="城市"
-		            android:paddingLeft="10dp"
-		            android:textColor="#858585"
-		            android:textSize="17dp"
-		            android:layout_width="wrap_content"
-		            android:layout_height="wrap_content"
-		            android:layout_centerVertical="true"/>
-		        <TextView 
-		            android:id="@+id/edit_city_textview"
-		            style="@style/editstyle"/>
-		        <View android:layout_width="match_parent"
-		            android:layout_height="1dp"
-		            android:layout_alignParentBottom="true"
-		            android:layout_alignLeft="@+id/edit_city_textview"
-		            android:layout_marginRight="5dp"
-		            android:background="#FAF0E6" />
-		        <ImageView
-	                android:layout_width="wrap_content"
-	                android:layout_height="wrap_content"
-	                android:layout_alignParentRight="true"
-	                android:layout_centerVertical="true"
-	                android:src="@drawable/arrow_r" />
-		    </RelativeLayout>
+		    
 		    
 		    
 		    
@@ -384,34 +350,32 @@
 	                android:src="@drawable/arrow_r" />
 		    </RelativeLayout>
 		    
-		    
-		    
 		    <RelativeLayout 
-		        android:id="@+id/edit_registertime_name"
+		        android:id="@+id/edit_city_name"
 		        android:layout_width="match_parent"
 		        android:layout_height="40dp"
-		        android:background="@drawable/item_selector"
+				android:background="@drawable/item_selector"
 		        android:clickable="true"
 		        android:paddingLeft="15dp"
 		        android:paddingRight="20dp"
 		        >
 		        <TextView 
-		            android:id="@+id/registertime_text"
-		            android:layout_alignTop="@+id/edit_registertime_textview"
-		            android:text="注册时间"
-		            android:paddingLeft="0dp"
+		            android:id="@+id/city_text"
+		            android:layout_alignTop="@+id/edit_city_textview"
+		            android:text="城市"
+		            android:paddingLeft="10dp"
 		            android:textColor="#858585"
 		            android:textSize="17dp"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:layout_centerVertical="true"/>
 		        <TextView 
-		            android:id="@+id/edit_registertime_textview"
+		            android:id="@+id/edit_city_textview"
 		            style="@style/editstyle"/>
 		        <View android:layout_width="match_parent"
 		            android:layout_height="1dp"
 		            android:layout_alignParentBottom="true"
-		            android:layout_alignLeft="@+id/edit_registertime_textview"
+		            android:layout_alignLeft="@+id/edit_city_textview"
 		            android:layout_marginRight="5dp"
 		            android:background="#FAF0E6" />
 		        <ImageView
@@ -421,6 +385,7 @@
 	                android:layout_centerVertical="true"
 	                android:src="@drawable/arrow_r" />
 		    </RelativeLayout>
+		    
 	    </LinearLayout>
 	</ScrollView>
     

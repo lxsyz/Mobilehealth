@@ -17,9 +17,11 @@ import cn.bmob.v3.Bmob;
 import cn.bmob.v3.listener.SaveListener;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.Button;
@@ -39,7 +41,7 @@ public class SignUpActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sign_up);
-		
+		initWindow();
 		initView();
 	}
 
@@ -134,5 +136,10 @@ public class SignUpActivity extends Activity implements OnClickListener {
 		}
 	}
 		
-	
+	private void initWindow() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			getWindow().addFlags(
+					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		}
+	}
 }

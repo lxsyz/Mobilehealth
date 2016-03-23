@@ -15,13 +15,13 @@ public class Classification {
 	 double qd=0;
 	 double csvm=0;
 	 double[] csvms=new double[20];
-	 double kurtosis=0;//·åÌ¬
+	 double kurtosis=0;//å³°æ€
 	public Classification(){};
 	public Classification(double[] array,int length){
 		this.array=array;
 		this.length=length;
 	};
-	public double getMeans()//Æ½¾ùÖµ
+	public double getMeans()//å¹³å‡å€¼
 	{    double sum=0;
 		for (int i=0;i<length; i++)
 		{
@@ -30,7 +30,7 @@ public class Classification {
 		return means=sum/length;	
 		
 	}
-	public double getStd()//±ê×¼²î
+	public double getStd()//æ ‡å‡†å·®
 	{
 		
 		double stdsum=0;
@@ -47,7 +47,7 @@ public class Classification {
 		return vs=std/means;
 	}
 	
-	public double getSk()//Æ«¶È	
+	public double getSk()//ååº¦	
 	{
 		double sksum=0;
 		for(int i=0;i<length;i++)
@@ -56,11 +56,11 @@ public class Classification {
 		}
 		return sk=(sksum*length)/((length-1)*(length-2)*Math.pow(std,2));	
 	}
-	public double getQd()//ËÄ·ÖÎ»²î
+	public double getQd()//å››åˆ†ä½å·®
 	{
 		double[] sortArray=Arrays.copyOf(array, length);
-		//Ã°ÅİÅÅĞò
-		for (int i = 0; i < length -1; i++){    //×î¶à×ön-1ÌËÅÅĞò
+		//å†’æ³¡æ’åº
+		for (int i = 0; i < length -1; i++){    //æœ€å¤šåšn-1è¶Ÿæ’åº
 			              for(int j = 0 ;j < length - i - 1; j++){    
 			                  if(sortArray[j] < sortArray[j + 1]){   
 			                      double temp = sortArray[j];
@@ -147,7 +147,7 @@ public class Classification {
 		return this.stepCount;
 		
 	}
-	public double getKurtosis()//·åÌ¬
+	public double getKurtosis()//å³°æ€
 	{
 		double k4Sum=0;
 		double k2Sum=0;

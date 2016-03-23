@@ -11,7 +11,9 @@ import com.bbcc.mobilehealth.util.UserModel;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -38,6 +40,8 @@ public class PersonDataActivity extends Activity implements OnClickListener{
 		edit_province_textview,edit_city_textview,edit_work_textview,edit_birthday_textview,
 		edit_phonenumber_textview,edit_registertime_textview;
 	private TextView changePwd;
+	
+	private Button bt_out;
 	
 	UserModel model = new UserModel();
 	
@@ -77,15 +81,15 @@ public class PersonDataActivity extends Activity implements OnClickListener{
 		edit_birthday_textview = (TextView)findViewById(R.id.userinfo_birthday);
 		edit_city_textview = (TextView)findViewById(R.id.userinfo_city);
 		edit_province_textview = (TextView)findViewById(R.id.userinfo_province);
-		edit_registertime_textview = (TextView)findViewById(R.id.userinfo_registertime);
 		edit_work_textview = (TextView)findViewById(R.id.userinfo_work);
 		edit_phonenumber_textview = (TextView)findViewById(R.id.userinfo_phonenum);
 		changePwd = (TextView)findViewById(R.id.changePwd);
-		
+		bt_out = (Button)findViewById(R.id.bt_out);
 		
 		edit = (ImageView)findViewById(R.id.edit_userinfo);
 		edit.setOnClickListener(this);
 		changePwd.setOnClickListener(this);
+		bt_out.setOnClickListener(this);
 	}
 	
 	private void initData() {
@@ -95,28 +99,28 @@ public class PersonDataActivity extends Activity implements OnClickListener{
 				edit_name_textview.setText(userName);
 				model.setName(userName);
 			}
-			if (!birthday.equals("null")) {
+			if (birthday!= null && !birthday.equals("null") && !birthday.equals("0000-00-00")) {
 				edit_birthday_textview.setText(birthday);
 				model.setBirthday(birthday);
 			}
-			if (!city.equals("null")) {
+			if (city != null && !city.equals("null")) {
 				edit_city_textview.setText(city);
 				model.setCity(city);
 			}
 			
-			if (!height.equals("null")) {
+			if (height != null && !height.equals("null") && !height.equals("0")) {
 				edit_height_textview.setText(height);
 				model.setHeight(height);
 				
 			}
-			if (!weight.equals("null")) {
+			if (weight != null && !weight.equals("null") && !weight.equals("0")) {
 			
 				edit_weight_textview.setText(weight);
 				model.setWeight(weight);
 				
 			}
 			
-			if (!phoneNumber.equals("null")) {
+			if (phoneNumber!=null &&!phoneNumber.equals("null")) {
 				edit_phonenumber_textview.setText(phoneNumber+" ");
 				model.setPhone(phoneNumber);
 				
@@ -127,7 +131,6 @@ public class PersonDataActivity extends Activity implements OnClickListener{
 				model.setProvince(province);
 			
 			}
-			edit_registertime_textview.setText(" ");
 			if (!profession.equals("null")) {
 				edit_work_textview.setText(profession);
 				model.setWork(profession);
@@ -175,6 +178,26 @@ public class PersonDataActivity extends Activity implements OnClickListener{
 		case R.id.changePwd:
 			Intent intent2 = new Intent(PersonDataActivity.this,ChangePasswordActivity.class);
 			startActivity(intent2);
+			break;
+			
+		case R.id.bt_out:
+			new AlertDialog.Builder(PersonDataActivity.this).setTitle("确定要退出吗")
+				.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						arg0.dismiss();
+					}
+				}).setPositiveButton("确定", new DialogInterface.OnClickListener() {
+					
+					@Override
+					public void onClick(DialogInterface arg0, int arg1) {
+						arg0.dismiss();
+						Constant.PHONE_NUMBER = null;
+						PersonDataActivity.this.finish();
+					}
+				}).show();
+			
 			break;
 		default:
 			break;

@@ -19,7 +19,7 @@
     <string name="menu_scan">扫一扫</string>
     <string name="tab_action">运动</string>
     <string name="tab_heartrate">心率</string>
-    <string name="tab_position">位置</string>
+    <string name="tab_position">睡眠</string>
     <string name="tab_more">更多</string>
      <string name="contentDescription">menu</string>
     

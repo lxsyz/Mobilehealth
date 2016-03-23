@@ -23,15 +23,15 @@ import android.os.IBinder;
 import android.util.Log;
 
 public class LoactionService extends Service implements AMapLocationListener {
-	public static final long LOCATION_UPDATE_MIN_TIME = 5*60 * 1000;//5·ÖÖÓ
-    public static final float LOCATION_UPDATE_MIN_DISTANCE = 15;//Î»ÖÃ¸Ä±ä³¬¹ı15Ã×
+	public static final long LOCATION_UPDATE_MIN_TIME = 5*60 * 1000;//5åˆ†é’Ÿ
+    public static final float LOCATION_UPDATE_MIN_DISTANCE = 15;//ä½ç½®æ”¹å˜è¶…è¿‡15ç±³
     private String userId;
     private Context context;
     private SimpleDateFormat sdf;
     
    // private FixedLengthList<AMapLocation> locationList = FixedLengthList
 //            .newInstance();
-    // Î»ÖÃ·şÎñ´úÀí
+    // ä½ç½®æœåŠ¡ä»£ç†
     private LocationManagerProxy locationManagerProxy;
 
     public LoactionService() {
@@ -45,11 +45,11 @@ public class LoactionService extends Service implements AMapLocationListener {
 		 context=getBaseContext();
 		 sdf=new SimpleDateFormat("yyyy-MM-DD ahh:mm:ss");
 		 locationManagerProxy = LocationManagerProxy.getInstance(this);
-	        // ¶¨Î»·½Ê½ÉèÖÃÎª»ìºÏ¶¨Î»£¬°üÀ¨ÍøÂç¶¨Î»ºÍGPS¶¨Î»
+	        // å®šä½æ–¹å¼è®¾ç½®ä¸ºæ··åˆå®šä½ï¼ŒåŒ…æ‹¬ç½‘ç»œå®šä½å’ŒGPSå®šä½
 	        locationManagerProxy.requestLocationData(
 	                LocationProviderProxy.AMapNetwork, LOCATION_UPDATE_MIN_TIME,
 	                LOCATION_UPDATE_MIN_DISTANCE, this);
-	        // Èç¹û¶¨Î»·½Ê½°üÀ¨GPS¶¨Î»ĞèÒªÊÖ¶¯ÉèÖÃGPS¿ÉÓÃ
+	        // å¦‚æœå®šä½æ–¹å¼åŒ…æ‹¬GPSå®šä½éœ€è¦æ‰‹åŠ¨è®¾ç½®GPSå¯ç”¨
 	        locationManagerProxy.setGpsEnable(true);
 
 	        Log.v("tag", "locationservicestart");
@@ -62,7 +62,7 @@ public class LoactionService extends Service implements AMapLocationListener {
 	            locationManagerProxy.removeUpdates(this);
 	            locationManagerProxy.destory();
 	        }
-	        //ÉèÖÃÎªnullÊÇÎªÁËÌáĞÑÀ¬»ø»ØÊÕÆ÷»ØÊÕ×ÊÔ´
+	        //è®¾ç½®ä¸ºnullæ˜¯ä¸ºäº†æé†’åƒåœ¾å›æ”¶å™¨å›æ”¶èµ„æº
 	        locationManagerProxy = null;
 	        Log.v("tag", "locationservicestop");
 	}
@@ -123,9 +123,9 @@ public class LoactionService extends Service implements AMapLocationListener {
 		    String address = null;
 	        intent.setAction("LocationBroadcast");
 	        intent.putExtra("latitude",
-	        		latitude);//Î³¶È
+	        		latitude);//çº¬åº¦
 	        intent.putExtra("longitude",
-	        		longitude);//¾­¶È
+	        		longitude);//ç»åº¦
 	        if(aMapLocation.getProvider().equals("lbs"))
 	        {
 	        	address=aMapLocation.getAddress();
@@ -139,7 +139,7 @@ public class LoactionService extends Service implements AMapLocationListener {
 	                aMapLocation.getLatitude()+","+ aMapLocation.getLatitude()+","+aMapLocation.getAddress());
             if(!userId.equals(""))
             {
-            	//µ±Ç°Ê±¼ä
+            	//å½“å‰æ—¶é—´
             	Date now=new Date();
 				DateFormat d1 = DateFormat.getDateInstance();
 		        String nowDate = d1.format(now);

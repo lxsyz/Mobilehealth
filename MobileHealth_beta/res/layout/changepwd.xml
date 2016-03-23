@@ -5,6 +5,11 @@
     android:background="@color/my_lightgray"
     android:orientation="vertical" >
     
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/custom_title" />
+    
     <com.bbcc.mobilehealth.view.ClearEditText
         android:id="@+id/pwd"
         android:layout_marginTop="60dp"
@@ -61,7 +66,7 @@
     <Button
         android:id="@+id/confirm"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:padding="8dp"

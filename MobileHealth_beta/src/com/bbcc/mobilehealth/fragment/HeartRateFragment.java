@@ -1,23 +1,62 @@
-﻿package com.bbcc.mobilehealth.fragment;
+ package com.bbcc.mobilehealth.fragment;
 
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.sql.SQLDataException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
-import javax.net.ssl.TrustManagerFactorySpi;
+import java.util.TimeZone;
 
+import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.params.HttpParams;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.amap.api.location.core.e;
 import com.bbcc.mobilehealth.R;
 import com.bbcc.mobilehealth.service.HardwareConnectorService;
 import com.bbcc.mobilehealth.util.Constant;
-import com.bbcc.mobilehealth.util.SystemBarTintManager;
+import com.bbcc.mobilehealth.util.DeepSleepModel;
+import com.bbcc.mobilehealth.util.HeartrateData;
+import com.bbcc.mobilehealth.util.MyDBHelp;
+import com.bbcc.mobilehealth.util.REMSleepModel;
+import com.bbcc.mobilehealth.util.ShallowSleepModel;
+import com.bbcc.mobilehealth.util.SleepModel;
 import com.bbcc.mobilehealth.view.BluetoothDialog;
-import com.bbcc.mobilehealth.view.BluetoothDialog.BluetoothDialogListener;
+import com.bbcc.mobilehealth.view.CancelView;
 import com.bbcc.mobilehealth.view.DrawChart;
 import com.bbcc.mobilehealth.view.ProcessView;
-import com.wahoofitness.common.datatypes.TimeInstant;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
 import com.wahoofitness.common.log.Logger;
 import com.wahoofitness.connector.HardwareConnectorEnums.SensorConnectionState;
 import com.wahoofitness.connector.capabilities.Capability;
@@ -26,80 +65,135 @@ import com.wahoofitness.connector.capabilities.Heartrate.Data;
 import com.wahoofitness.connector.capabilities.Heartrate;
 import com.wahoofitness.connector.conn.connections.SensorConnection;
 import com.wahoofitness.connector.conn.connections.params.ConnectionParams;
-import com.wahoofitness.connector.data.HeartrateData;
 
-import android.app.ActionBar;
+import android.R.integer;
+import android.R.string;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.ActionBar.LayoutParams;
-import android.app.AlertDialog.Builder;
 import android.bluetooth.BluetoothAdapter;
+import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Color;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Rect;
-import android.opengl.Visibility;
-import android.os.Build;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 
-import android.support.v4.app.Fragment;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.RotateAnimation;
 import android.view.animation.ScaleAnimation;
 import android.view.animation.TranslateAnimation;
 import android.view.animation.Animation.AnimationListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
 import android.widget.RelativeLayout;
-import android.widget.Switch;
+import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class HeartRateFragment extends HardwareConnectorFragment {
-	// private FragmentManager fragmentManager;
-	// private FragmentTransaction transaction;
-	// private ViewPager fragheartrate;
-	// private FragmentPagerAdapter fa;
 	private final Heartrate.Listener mHeartrateListener = new Heartrate.Listener() {
 
 		@Override
 		public void onHeartrateData(Data data) {
-			if (moveState==1) {
+			if (moveState == 1) {
 				startMove();
 				processView.setVisibility(View.GONE);
+				cancelView.setVisibility(View.VISIBLE);
+				RotateAnimation animation = new RotateAnimation(0f, 45f,
+						Animation.RELATIVE_TO_SELF, 0.5f,
+						Animation.RELATIVE_TO_SELF, 0.5f);
+				animation.setDuration(1000);// 设置动画持续时间
+				animation.setFillAfter(true);
+				cancelView.setAnimation(animation);
+				animation.startNow();
 				drawChart.setVisibility(View.VISIBLE);
+				heartraTextView.setVisibility(View.VISIBLE);
 			}
 			Heartrate heartrate = (Heartrate) getCapability(CapabilityType.Heartrate);
 			data = heartrate.getHeartrateData();
 			int rate = data.getHeartrateBpm();
 			drawChart.startInvalidate(rate);
-			heartraTextView.setText(rate+" bmp");
-//			circleLayout.clearAnimation();
-//			circleLayout.layout(circleLayout_left + xMove, circleLayout_top + yMove, (int) (circleLayout_left
-//					+ xMove + circleLayout_width * 0.3),
-//					(int) (circleLayout_top + yMove + circleLayout_height * 0.3));
+			heartraTextView.setText(rate + " bmp");
+			time.setToNow();
+			if (tempMinute == -1) {
+				tempYear = time.year;
+				tempMonth = time.month + 1;
+				tempDay = time.monthDay;
+				tempHour = time.hour;
+				tempMinute = time.minute;
+				Log.v("sql", "TTTTTTTTTTTTTTT****************");
+			}
+			Log.v("sql", "time.minute-->" + time.minute);
+			Log.v("sql", "tempTime.minute-->" + tempMinute);
+			
+			
+			
+			if (tempMinute == time.minute) {
+				linkedList.add(rate);
+				Log.v("sql", "tempTime.minute == time.minute   &&  add");
+			} else {
+				Log.v("sql", "sendmsg");
+				// new RateUploadTask().execute();
+				heartrateData = new HeartrateData(tempYear, tempMonth, tempDay,
+						tempHour, tempMinute, new LinkedList<Integer>(
+								linkedList));
+				Message msg = Message.obtain();
+				msg.what = Constant.HEARTATE_DB_SAVE;
+				msg.obj = heartrateData;
+				dbHandler.sendMessage(msg);
+				tempYear = time.year;
+				tempMonth = time.month + 1;
+				tempDay = time.monthDay;
+				tempHour = time.hour;
+				tempMinute = time.minute;
+				linkedList.clear();
+				linkedList.add(rate);
+			}
+			if (linkedList2 != null) {
+				Log.d("linkedlist2", linkedList2.size()+" ");
+				if (linkedList2.size() == 3) {
+					Message msg = Message.obtain();
+					msg.what = Constant.SLEEPDATA_DB_SAVE;
+					dbHandler.sendMessage(msg);
+					
+					//linkedList2.clear();
+					
+				}
+			}
 		}
 
 		@Override
 		public void onHeartrateDataReset() {
 		}
 	};
+	private MyDBHelp myDBHelp = null;
+	private ContentValues contentValues = null;
+	private LinkedList<Integer> linkedList = null;
+	private LinkedList<SleepModel> linkedList2 = new LinkedList<SleepModel>();
+	private Time time = null;
+	private int tempYear = -1;
+	private int tempMonth = -1;
+	private int tempDay = -1;
+	private int tempHour = -1;
+	private int tempMinute = -1;
+	
+	private HeartrateData heartrateData;
 	private View rootView;
 	private List<ConnectionParams> mDiscoveredConnectionParams = new ArrayList<ConnectionParams>();
 	private static final Logger L = new Logger(DiscoverFragment.class);
@@ -109,46 +203,149 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 	private LinearLayout textViewLayout;
 	private LinearLayout circleLayout;
 	private ProcessView processView;
-	private TextView circleTextView;
 	private TextView titleTextView;
 	private TextView heartraTextView;
-	
-	private ImageView circleImageView;
 	private DrawChart drawChart;
+	private CancelView cancelView;
 	private RelativeLayout mainLayout;
+	private Button button;
+	private RelativeLayout.LayoutParams layoutParams;
+	private int rules = RelativeLayout.CENTER_IN_PARENT;
 	private int xMove = 300;
 	private int yMove = -300;
-	private int moveState=1;
-	private int circleLayout_width=0;
-	private int circleLayout_height=0;
-	private int circleLayout_top=0;
-	private int circleLayout_left=0;
-	private boolean isBluetoothOpen = false;
+	private int moveState = 1;
+
+	private int circleLayout_width = 0;
+	private int circleLayout_height = 0;
+	private int circleLayout_top = 0;
+	private int circleLayout_left = 0;
+	private int l = 0;
+	private int t = 0;
+	private int r = 0;
+	private int b = 0;
+
 	private boolean discovering = false;
-	private boolean isConnected = false;
 	private ConnectionParams mConnectionParams = null;
 	private SensorConnection sensorConnection;
-	private ActionBar mActionBar;
-	private Handler handler = new Handler() {
+	private Handler dbHandler = new Handler() {
+		public void handleMessage(Message msg) {
+			switch (msg.what) {
+			case Constant.HEARTATE_DB_SAVE:
+				Log.v("sql", "handler begin");
+				HeartrateData hData = (HeartrateData) msg.obj;
+				String phoneNumber = "18720083869";
+				int averageRate = 0;
+				int state = 0;
+				String dateTime = hData.getYear() + "-" + hData.getMonth()
+						+ "-" + hData.getDay() + " " + hData.getHour() + ":"
+						+ hData.getMinute();
+				Log.v("sql", "hData.getLinkedList().size()"
+						+ hData.getLinkedList().size());
+				if (hData.getLinkedList().size() != 0) {
+					Iterator<Integer> iterator = hData.getLinkedList()
+							.iterator();
+					int i = 0;
+					int sumRate = 0;
+					while (iterator.hasNext()) {
+						i++;
+						sumRate += iterator.next();
+					}
+					averageRate = sumRate / i;
+					if (averageRate < 30 || averageRate > 150) {
+						state = 1;
+					}
+					
+					//添加到睡眠list中
+					SleepModel model = new SleepModel();
+					model.setTime(dateTime);
+					model.setRate(averageRate);
+					linkedList2.add(model);
+					Log.d("linkedlist2", linkedList2.size()+" ");
+					String insertString = "insert into heart_rate(phoneNumber,time,rate,state) values ("
+							+ phoneNumber
+							+ ","
+							+ "'"
+							+ dateTime
+							+ "'"
+							+ ","
+							+ averageRate + "," + state + ");";
+					SQLiteDatabase db = myDBHelp.getWritableDatabase();
+					db.execSQL(insertString);
+					Log.v("sql", insertString);
+				}
+
+				break;
+			case Constant.SLEEPDATA_DB_SAVE:
+				Log.d("linklist2", linkedList2.size()+" ");
+				phoneNumber = "18720083869";
+				//int result = 1;
+				int result = heartRate2Sleep(linkedList2);
+				String insertString = "";
+				SQLiteDatabase db = myDBHelp.getWritableDatabase();
+				switch (result) {
+					case 1:
+						insertString = "insert into SLEEP_DEEP(phoneNumber,startTime,endTime) values ("
+								+ phoneNumber
+								+ ","
+								+ "'"
+								+ linkedList2.get(0).getTime()
+								+ "'"
+								+ ","
+								+ "'"
+								+ linkedList2.get(2).getTime()
+								+ "'"
+								+ ");";
+						Log.d("linklist2", insertString+" ");
+						db.execSQL(insertString);
+						break;
+					case 2:
+						insertString = "insert into SLEEP(phoneNumber,startTime,endTime) values ("
+								+ phoneNumber
+								+ ","
+								+ "'"
+								+ linkedList2.get(0).getTime()
+								+ "'"
+								+ ","
+								+ "'"
+								+ linkedList2.get(2).getTime()
+								+ "'"
+								+ ");"; 
+						Log.d("linklist2", insertString+" ");
+						db.execSQL(insertString);
+						break;
+					case 3:
+//						insertString = "insert into sleep_rem(phoneNumber,startTime,endTime) values ("
+//								+ phoneNumber
+//								+ ","
+//								+ "'"
+//								+ linkedList2.get(0).getTime()
+//								+ "'"
+//								+ ","
+//								+ "'"
+//								+ linkedList2.get(2).getTime()
+//								+ "'"
+//								+ ");";
+//						Log.d("linklist2", insertString+" ");
+//						db.execSQL(insertString);
+						break;
+					default:
+						break;
+				} 
+				
+				MyDBHelp.readDB2Dir(getActivity());
+				linkedList2.clear();
+				break;
+			default:
+				break;
+			}
+
+		};
+	};
+	private Handler listenerHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
 			case Constant.HEARTATE_CONNECT_SUCCESS:
-				// enableDiscovery(true);
-				// refresh();
-				// sensorConnection = getSensorConnection(mConnectionParams);
-				// refresh();
-				// sensorConnection=connectSensor(mConnectionParams);
-
-				// Heartrate heartrate = (Heartrate)
-				// getCapability(CapabilityType.Heartrate);
-				// Heartrate.Data data = heartrate.getHeartrateData();
-				// int rate = data.getHeartrateBpm();
-				// circleTextView.setText("心率" + rate);
-				// processView.setVisibility(View.GONE);
-				// circleTextView.setVisibility(View.VISIBLE);
-				
 				getHeartrateCap().addListener(mHeartrateListener);
-				
 				break;
 
 			default:
@@ -168,8 +365,10 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		Log.v("tag", "HeartRates:onCreate");
+		myDBHelp = new MyDBHelp(getActivity());
+		linkedList = new LinkedList<Integer>();
+		time = new Time();
 		mSavedConnectionParams.clear();
-		// begin=findViewById(R.id.begin);
 		SharedPreferences sharedPreferences = getActivity()
 				.getSharedPreferences("PersistentConnectionParams", 0);
 		for (Object entry : sharedPreferences.getAll().values()) {
@@ -196,32 +395,43 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		Log.v("tag", "HeartRate:onActivityCreate");
-		// mActionBar=getActivity().getActionBar();
-		// mActionBar.show();
-		circleLayout = (LinearLayout) getActivity().findViewById(
-				R.id.heartrate_circle_main);
-		textViewLayout = (LinearLayout) getActivity().findViewById(
-				R.id.heartrate_circle_textview);
-		circleTextView = (TextView) getActivity().findViewById(
-				R.id.heartrate_circle_textview2);
+		LayoutInflater inflater = getActivity().getLayoutInflater();
+
+		circleLayout = (LinearLayout) inflater.inflate(
+				R.layout.frag_heartrate_centeritem, null);
+		textViewLayout = (LinearLayout) circleLayout
+				.findViewById(R.id.heartrate_circle_textview);
+		processView = (ProcessView) circleLayout
+				.findViewById(R.id.heartrate_circle_processview);
 		titleTextView = (TextView) getActivity().findViewById(
 				R.id.heartrate_title_textview);
 		heartraTextView = (TextView) getActivity().findViewById(
 				R.id.heartrate_show_text);
-		processView = (ProcessView) getActivity().findViewById(
-				R.id.heartrate_circle_processview);
-		mainLayout=(RelativeLayout)getActivity().findViewById(R.id.frag_heartrate_layout);
-//		circleImageView = (ImageView) getActivity().findViewById(
-//				R.id.heartrate_circle_imageview);
-		drawChart=(DrawChart) getActivity().findViewById(
+		cancelView = (CancelView) circleLayout
+				.findViewById(R.id.heartrate_circle_cancelview);
+		mainLayout = (RelativeLayout) getActivity().findViewById(
+				R.id.frag_heartrate_layout);
+		drawChart = (DrawChart) getActivity().findViewById(
 				R.id.heartrate_circle_drawchart);
-		WindowManager wm = (WindowManager) getActivity()
-				.getSystemService(Context.WINDOW_SERVICE);
+		layoutParams = new RelativeLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		button = (Button) getActivity().findViewById(R.id.upload);
+		layoutParams.addRule(rules);
+		circleLayout.setLayoutParams(layoutParams);
+		mainLayout.addView(circleLayout);
+		WindowManager wm = (WindowManager) getActivity().getSystemService(
+				Context.WINDOW_SERVICE);
 		int screenWidth = wm.getDefaultDisplay().getWidth();
-//		drawChart=new DrawChart(getActivity());
-//		drawChart.layout(0, 220, screenWidth, 520);
 		drawChart.setCircleLayout(circleLayout);
 		drawChart.setFragLayout(mainLayout);
+		button.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				
+			}
+		});
+
 		circleLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -230,33 +440,18 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 					BluetoothDialog dialog = new BluetoothDialog(getActivity(),
 							R.style.dialog_style);
 					dialog.show();
-//					// dialog.setBluetoothDialogListener(new
-//					// BluetoothDialogListener() {
-//					//
-//					// @Override
-//					// public void callBack(boolean b) {
-//					// isBluetoothOpen=b;
-//					// }
-//					// });
-//					// AlertDialog.Builder dialog=new
-//					// AlertDialog.Builder(getActivity());
-//					// AlertDialog alertDialog=dialog.create();
-//					// alertDialog.show();
-//					// Window window=alertDialog.getWindow();
-//					// window.setContentView(R.layout.bluetooth_dialog);
 				}
-				if (moveState==1) {
+				if (moveState == 1) {
 					textViewLayout.setVisibility(View.GONE);
 					processView.setVisibility(View.VISIBLE);
 					enableDiscovery(true);
-//					startMove();
-//					drawChart.setVisibility(View.VISIBLE);
-				}else {
+				} else {
+					getHeartrateCap().removeListener(mHeartrateListener);
+					disconnectSensor(mConnectionParams);
+					enableDiscovery(false);
 					startRevsMove();
-					
+
 				}
-				// startMove();
-				// refresh();
 
 			}
 		});
@@ -300,13 +495,6 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 						return lhs.getName().compareTo(rhs.getName());
 					}
 				});
-
-		// Collection<CapabilityType>
-		// heartrate=sensorConnection.getCurrentCapabilities();
-		// Log.v("tag",
-		// "heartrate.toString()***************"+heartrate.toString());
-
-		// refresh();
 
 	}
 
@@ -362,35 +550,22 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 		int left = circleLayout.getLeft();
 		int top = circleLayout.getTop();
 		yMove = -(top - statusBarHeight - titleHeight);
-		Log.e("tag", "top" + "***" + top);
-		Log.e("tag", "statusBarHeight" + "***" + statusBarHeight);
-		Log.e("tag", "titleHeight" + "***" + titleHeight);
-		Log.e("tag", "yMove" + "***" + yMove);
 		xMove = screenWidth
 				- (int) (100 + circleLayout.getMeasuredWidth() * 0.3) - left;
-		Log.e("tag", "screenWidth" + "***" + screenWidth);
-		Log.e("tag",
-				"circleLayout.getWidth()" + "***" + circleLayout.getWidth());
-		Log.e("tag",
-				"circleLayout.getMeasuredWidth()" + "***"
-						+ circleLayout.getMeasuredWidth());
-		Log.e("tag", "left" + "***" + left);
-		Log.e("tag", "xMove" + "***" + xMove);
 	}
 
 	private void startMove() {
 		setXYMove();
-		moveState=2;
-//		circleLayout.setBackgroundColor(Color.TRANSPARENT);
-//		textViewLayout.setVisibility(View.GONE);
-//		circleImageView.setVisibility(View.VISIBLE);
+		moveState = 2;
+		// circleLayout.setBackgroundColor(Color.TRANSPARENT);
+		// textViewLayout.setVisibility(View.GONE);
+		// circleImageView.setVisibility(View.VISIBLE);
 		Animation mScaleAnimation = new ScaleAnimation(1f, 0.3f, 1f, 0.3f);
 		mScaleAnimation.setDuration(1000);
-//		mScaleAnimation.setFillAfter(true);
 
 		Animation mTranslateAnimation = new TranslateAnimation(0, xMove, 0,
 				yMove);
-		mTranslateAnimation.setDuration(1000); 
+		mTranslateAnimation.setDuration(1000);
 		AnimationSet mAnimationSet = new AnimationSet(true);
 		mAnimationSet.addAnimation(mScaleAnimation);
 		mAnimationSet.setFillAfter(true);
@@ -401,7 +576,7 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 
 			@Override
 			public void onAnimationStart(Animation arg0) {
-				
+
 			}
 
 			@Override
@@ -417,31 +592,28 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 				circleLayout_width = circleLayout.getWidth();
 				circleLayout_height = circleLayout.getHeight();
 				circleLayout.clearAnimation();
-				circleLayout.layout(circleLayout_left + xMove, circleLayout_top + yMove, (int) (circleLayout_left
-						+ xMove + circleLayout_width * 0.3),
-						(int) (circleLayout_top + yMove + circleLayout_height * 0.3));
-//				RelativeLayout.LayoutParams layoutParams=new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-//				layoutParams.setMargins(circleLayout_left + xMove, circleLayout_top + yMove, (int) (circleLayout_left
-//						+ xMove + circleLayout_width * 0.3), (int) (circleLayout_top + yMove + circleLayout_height * 0.3));
-//				circleLayout.setLayoutParams(layoutParams);
-//				circleLayout.setLayoutParams(new RelativeLayout.LayoutParams((circleLayout_left + xMove)-(int) (circleLayout_left
-//						+ xMove + circleLayout_width * 0.3), (circleLayout_top + yMove)-(int) (circleLayout_top + yMove + circleLayout_height * 0.3)));
-//				drawChart.setL(circleLayout_left + xMove);
-//				drawChart.setT(circleLayout_top + yMove);
-//				drawChart.setR((int) (circleLayout_left
-//						+ xMove + circleLayout_width * 0.3));
-//				drawChart.setB((int) (circleLayout_top + yMove + circleLayout_height * 0.3));
-				// circleLayout.setBackground(getResources().getDrawable(R.drawable.hearhrate_cancel));
-//				circleLayout.clearAnimation();
+				l = circleLayout_left + xMove;
+				t = circleLayout_top + yMove;
+				r = (int) (circleLayout_left + xMove + circleLayout_width * 0.3);
+				b = (int) (circleLayout_top + yMove + circleLayout_height * 0.3);
+				layoutParams.removeRule(rules);
+				layoutParams.height = b - t;
+				layoutParams.width = r - l;
+				layoutParams.leftMargin = l;
+				layoutParams.topMargin = t;
+				circleLayout.setLayoutParams(layoutParams);
 			}
 		});
 	}
 
 	private void startRevsMove() {
-		xMove=-xMove;
-		yMove=-yMove;
-		moveState=1;
-		Animation mScaleAnimation = new ScaleAnimation(1f, (float) (10f/3), 1f,(float) (10f/3));
+		xMove = -xMove;
+		yMove = -yMove;
+		moveState = 1;
+		cancelView.clearAnimation();
+		cancelView.setVisibility(View.GONE);
+		Animation mScaleAnimation = new ScaleAnimation(1f, (float) (10f / 3),
+				1f, (float) (10f / 3));
 		mScaleAnimation.setDuration(1000);
 		mScaleAnimation.setFillAfter(true);
 
@@ -458,7 +630,7 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 
 			@Override
 			public void onAnimationStart(Animation arg0) {
-				
+
 			}
 
 			@Override
@@ -468,17 +640,19 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 
 			@Override
 			public void onAnimationEnd(Animation arg0) {
-
+				drawChart.setVisibility(View.GONE);
+				heartraTextView.setVisibility(View.GONE);
 				int left = circleLayout.getLeft();
 				int top = circleLayout.getTop();
-				int width = circleLayout.getWidth();
-				int height = circleLayout.getHeight();
-//				circleLayout.clearAnimation();
-				circleLayout.setBackgroundColor(Color.TRANSPARENT);
-//				circleImageView.setVisibility(View.GONE);
-				circleLayout.layout(left+xMove , top+yMove, (int) (left
-						+xMove + width * (10f/3)), (int) (top + yMove + height * (10f/3)) );
-				// circleLayout.setBackground(getResources().getDrawable(R.drawable.hearhrate_cancel));
+				int right = circleLayout.getRight();
+				int bottom = circleLayout.getBottom();
+				circleLayout.clearAnimation();
+				layoutParams.width = LayoutParams.WRAP_CONTENT;
+				layoutParams.height = LayoutParams.WRAP_CONTENT;
+				layoutParams.setMargins(left, top, right, bottom);
+				layoutParams.addRule(rules);
+				circleLayout.setLayoutParams(layoutParams);
+				textViewLayout.setVisibility(View.VISIBLE);
 			}
 		});
 	}
@@ -550,24 +724,6 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 	@Override
 	public void onHardwareConnectorServiceConnected(
 			HardwareConnectorService hardwareConnectorService) {
-		// refresh();
-		// Toast.makeText(getActivity(), "onHardwareConnectorServiceConnected",
-		// Toast.LENGTH_SHORT).show();
-		// if (params != null) {
-		// if (sensorConnection != null) {
-		//
-		// } else {
-		//
-		// if (getDiscoveredConnectionParams().contains(params)) {
-		// Toast.makeText(getActivity(), "Discovered",
-		// Toast.LENGTH_SHORT).show();
-		// isConnected = true;
-		// } else {
-		// Toast.makeText(getActivity(), "DISCONNECTED2",
-		// Toast.LENGTH_SHORT).show();
-		// }
-		// }
-		// }
 		refresh();
 
 	}
@@ -592,7 +748,9 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 			Toast.makeText(getActivity(), "CONNECTED", Toast.LENGTH_SHORT)
 					.show();
 			// getHeartrateCap().addListener(mHeartrateListener);
-			isConnected = true;
+			Message msg = Message.obtain();
+			msg.what = Constant.HEARTATE_CONNECT_SUCCESS;
+			listenerHandler.sendEmptyMessageDelayed(msg.what, 2500);
 			break;
 		case CONNECTING:
 			Toast.makeText(getActivity(), "CONNECTING", Toast.LENGTH_SHORT)
@@ -612,21 +770,6 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 			break;
 
 		}
-		// refresh();
-		// refresh();
-		// if (isConnected) {
-		// if (this.params == null) {
-		// Log.v("params222", this.params.toString());
-		// } else {
-		// Heartrate heartrate = (Heartrate) getCapability(
-		// CapabilityType.Heartrate, this.params);
-		// Heartrate.Data data = heartrate.getHeartrateData();
-		// int rate = data.getHeartrateBpm();
-		// processView.setVisibility(View.GONE);
-		// circleTextView.setText("心率=" + rate);
-		// circleTextView.setVisibility(View.VISIBLE);
-		// }
-		// }
 	}
 
 	@Override
@@ -640,11 +783,11 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 			CapabilityType capabilityType) {
 		Toast.makeText(getActivity(), "onNewCapabilityDetected",
 				Toast.LENGTH_SHORT).show();
-		if (isConnected) {
-			Message msg = Message.obtain();
-			msg.what = Constant.HEARTATE_CONNECT_SUCCESS;
-			handler.sendEmptyMessageDelayed(msg.what, 2500);
-		}
+		// if (isConnected) {
+		// Message msg = Message.obtain();
+		// msg.what = Constant.HEARTATE_CONNECT_SUCCESS;
+		// handler.sendEmptyMessageDelayed(msg.what, 2500);
+		// }
 	}
 
 	private Heartrate getHeartrateCap() {
@@ -672,5 +815,40 @@ public class HeartRateFragment extends HardwareConnectorFragment {
 
 	protected SensorConnection getSensorConnection() {
 		return getSensorConnection(mConnectionParams);
+	}
+
+	/*
+	 * 睡眠转换成心率
+	 * @return 
+	 * 1    深度睡眠
+	 * 2    浅度睡眠
+	 * 3  REM
+	 */
+	private int heartRate2Sleep(LinkedList<SleepModel> link) {
+		double avg = (link.get(0).getRate() + link.get(1).getRate()+link.get(2).getRate()) / 3.0;
+		double std = Math.sqrt(((link.get(0).getRate()-avg)*(link.get(1).getRate()-avg)+(link.get(2).getRate()-avg)*(link.get(1).getRate()-avg)+(link.get(2).getRate()-avg)*(link.get(2).getRate()-avg))/3);
+		
+		//将每一组的标准差,平均值，和设定好的阈值相对比进而判断睡眠分期
+		int MIN_std=1;
+		int MIN_avg=61;
+		int MAX_std=2;
+		int MAX_avg=64;
+		
+		String startTime=link.get(0).getTime(),endTime=link.get(2).getTime();
+		
+		if (avg < MIN_avg && std < MIN_std) {
+			
+			//System.out.println("第" + (j + 1) + "组正处于深度睡眠阶段");
+			return 1;
+			
+		}
+		if (std > MAX_std && avg < MAX_avg) {
+			return 2;
+		}
+		if (avg > MAX_avg) {
+			return 3;
+		}
+		
+		return 0;
 	}
 }

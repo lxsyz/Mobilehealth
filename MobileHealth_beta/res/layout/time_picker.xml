@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:layout_marginLeft="32dp"
+    android:layout_marginRight="32dp"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/picker_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F5F5F5"
+        android:gravity="center"
+        android:padding="20dp"
+        android:text="picjer_title"
+        android:textColor="#ff6600"
+        android:textSize="18sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DADADA" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android:gravity="center"
+        android:background="#F5F5F5"
+        android:orientation="horizontal">
+
+
+        <com.bbcc.mobilehealth.view.WheelView
+            android:id="@+id/year"
+            style="@style/wheelViewStyle" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#DADADA" />
+
+        <com.bbcc.mobilehealth.view.WheelView
+            android:id="@+id/month"
+            style="@style/wheelViewStyle" />
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="#DADADA" />
+
+        <com.bbcc.mobilehealth.view.WheelView
+            android:id="@+id/day"
+            style="@style/wheelViewStyle" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DADADA" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F5F5F5"
+        android:orientation="horizontal"
+        android:paddingBottom="12dp"
+        android:paddingTop="12dp">
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_left_selector"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/confirm"
+            android:layout_width="0dp"
+            android:layout_height="44dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@drawable/btn_post_selector"
+            android:gravity="center"
+            android:text="确定"
+            android:textColor="@android:color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#DADADA" />
+</LinearLayout>

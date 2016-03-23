@@ -6,7 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.util.Log;
 
-import com.bbcc.mobilehealth.util.CountDownTimer;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -156,7 +155,7 @@ public class StepDcretor implements SensorEventListener {
             TEMP_STEP++;
             Log.v(TAG, "计步中 TEMP_STEP:" + TEMP_STEP);
         } else if (CountTimeState == 3) {
-            CURRENT_SETP++;
+           CURRENT_SETP+=1;
             if (onSensorChangeListener != null) {
                 onSensorChangeListener.onChange();
             }

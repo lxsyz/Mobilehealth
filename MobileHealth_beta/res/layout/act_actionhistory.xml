@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FF6766" >
+
+        <ImageView
+            android:id="@+id/bt_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/arrow_back" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="center_horizontal"
+            android:text="心率"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/bt_right"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/choose_date"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <com.bbcc.mobilehealth.view.PerWeekStepsChart
+        android:id="@+id/perWeekStepsChart"
+        android:layout_width="match_parent"
+        android:layout_height="330dp" />
+
+    <include
+        android:layout_width="300dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:layout_weight="1"
+        layout="@layout/act_actionhistory_item" />
+
+</LinearLayout>

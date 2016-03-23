@@ -2,18 +2,23 @@ package com.bbcc.mobilehealth.view;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.bbcc.mobilehealth.R;
+import com.bbcc.mobilehealth.util.CustomToast;
 import com.bbcc.mobilehealth.util.HorizontalScrollViewAdapter;
 import com.bbcc.mobilehealth.util.SleepModel;
 
 import android.R.integer;
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Looper;
 import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -28,6 +33,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyHorizontalScrollView extends HorizontalScrollView implements
 		OnClickListener
@@ -35,13 +41,11 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements
 	
 
 	/**
-	 * 图片滚动时的回调接口
-	 * 
 	 * 
 	 */
 	public interface CurrentImageChangeListener
 	{
-		void onCurrentImgChanged(int position, View viewIndicator);
+		void onCurrentImgChanged(String startDate, String endDate);
 	}
 
 	/**
@@ -98,7 +102,7 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements
 	 */
 	private int mScreenWitdh;
 
-
+	
 	/**
 	 * 保存View与位置的键值对
 	 */
@@ -113,6 +117,23 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements
 	private int rightTempIndex = 0;
 	
 	private int emptyViewSum;
+	
+	private List<String> sleepDataList = new ArrayList<String>();
+	
+//	private Handler handler = new Handler() {
+//		
+//		public void handleMessage(android.os.Message msg) {
+//			Log.d("handler", "handler execute");
+//			Looper.loop();
+//			if (msg.what == 0x11) {
+//				sleepDataList = (ArrayList<String>)msg.obj;
+//				Log.d("sleepData", sleepDataList.size()+ "  ");
+//			}
+//			
+//			//Looper.loop();
+//		};
+//	};
+	
 	
 	public MyHorizontalScrollView(Context context, AttributeSet attrs)
 	{
@@ -185,10 +206,7 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements
 			}
 		}
 		//如果设置了滚动监听则触发
-		if (mListener != null)
-		{
-			notifyCurrentImgChanged();
-		}
+
 
 	}
 	/**
@@ -223,62 +241,74 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements
 			mCurrentIndex--;
 			rightTempIndex--;
 			mFristIndex--;
-			//回调
-			if (mListener != null)
-			{
-				notifyCurrentImgChanged();
 
-			}	
 		} 
 		else {
+			Log.d("sleepdatalist", sleepDataList.size()+" ");
 			//添加数据
-			SleepModel model = new SleepModel();
-			SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
+			if (sleepDataList.size() != 0) {
 			
-			Calendar cal = Calendar.getInstance();
-			cal.add(Calendar.DATE, 0 - time);
-			time++;
-			model.setTime(sdf2.format(cal.getTime()));
-			model.setDeepSleepTime((int)(Math.random()*200) + 100);
-			model.setQianSleepTime((int)(Math.random()*200)+100);
-			mAdapter.addData(model);
-			
-			//移除最后一条
-			int oldViewPos = mContainer.getChildCount() - 1;
-			mViewPos.remove(mContainer.getChildAt(oldViewPos));
-			mContainer.removeViewAt(oldViewPos);
-			
-			index = 0;
-			
-			//ViewPos的左边界
-			tempIndex--;
-			//将此View放入第一个位置
-			View view = mAdapter.getView(index, null, mContainer);
-			mViewPos.put(view, tempIndex);
-			mContainer.addView(view, 0);
-			view.setOnClickListener(this);
-			//水平滚动位置向左移动view的宽度个像素
-			scrollTo(mChildWidth, 0);
-			//当前位置重置--，当前第一个显示的下标重置--
-			mCurrentIndex++;
-			mFristIndex = 0;
-			rightTempIndex--;
-			if (mCurrentIndex >= mCountOneScreen - 1) {
-				mCurrentIndex--;
+				SleepModel model = new SleepModel();
+				SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
+				
+				Calendar cal = Calendar.getInstance();
+				cal.add(Calendar.DATE, 0 - time);
+				time++;
+				Log.d("time", time+" ");
+				model.setTime(sdf2.format(cal.getTime()));
+				model.setDeepSleepTime(Integer.parseInt(sleepDataList.get(time - 6).split(",")[0]));
+				model.setQianSleepTime(Integer.parseInt(sleepDataList.get(time - 6).split(",")[1]));
+				mAdapter.addData(model);
+				
+				if (time - sleepDataList.size() == 5) {
+					sleepDataList.clear();
+					
+				}
+				//移除最后一条
+				int oldViewPos = mContainer.getChildCount() - 1;
+				mViewPos.remove(mContainer.getChildAt(oldViewPos));
+				mContainer.removeViewAt(oldViewPos);
+				
+				index = 0;
+				
+				//ViewPos的左边界
+				tempIndex--;
+				//将此View放入第一个位置
+				View view = mAdapter.getView(index, null, mContainer);
+				mViewPos.put(view, tempIndex);
+				mContainer.addView(view, 0);
+				view.setOnClickListener(this);
+				//水平滚动位置向左移动view的宽度个像素
+				scrollTo(mChildWidth, 0);
+				//当前位置重置--，当前第一个显示的下标重置--
+				mCurrentIndex++;
+				mFristIndex = 0;
+				rightTempIndex--;
+				if (mCurrentIndex >= mCountOneScreen - 1) {
+					mCurrentIndex--;
+				}
+				mFristIndex--;
+			} else {
+				if (count == 1) {
+					count++;
+					//Toast.makeText(getContext(), "加载数据中", 2000).show();
+					CustomToast.showToast(getContext(), "加载数据中", 2000);
+				}
+				else 
+					CustomToast.showToast(getContext(), "没有更多数据了", 2000);
+					//Toast.makeText(getContext(), "没有更多数据了", 2000).show();
+				return;
 			}
-			mFristIndex--;
-			
 		}
 	}
 
 	/**
 	 * 滑动时的回调
 	 */
-	public void notifyCurrentImgChanged()
+	public void notifyCurrentImgChanged(String startDate,String endDate)
 	{
 		
-		mListener.onCurrentImgChanged(mFristIndex, mContainer.getChildAt(0));
-
+		mListener.onCurrentImgChanged(startDate,endDate);
 	}
 
 	/**
@@ -360,28 +390,9 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements
 			}
 		}
 
-		if (mListener != null)
-		{
-			notifyCurrentImgChanged();
-		}
-
 	}
 
-	public void Invalidate(String selectedDate) {
-		SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd");
-		int chaju = 0;
-		try {
-			chaju = daysBetween(selectedDate,sdf2.format(new Date()));
-			Log.d("chaju", chaju+" ");
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		if (chaju < 5) {
-			mAdapter.getView(mAdapter.getCount() -1 - chaju, null, mContainer);
-		} else {
-			
-		}
-	}
+	
 	
 	
 	@Override
@@ -402,7 +413,18 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements
 				if (scrollX == 0)
 				{
 					Log.d("tag", "left");
+					
 					loadPre();
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+					Calendar cal2 = Calendar.getInstance();
+					cal2.add(Calendar.DATE, -5);
+					endDate = sdf.format(cal2.getTime());
+					cal2.add(Calendar.DATE, -30);
+					startDate = sdf.format(cal2.getTime()); 
+					if (mListener != null && mCurrentIndex - mCountOneScreen < 0) {
+						//sleepDataList.clear();
+						notifyCurrentImgChanged(startDate,endDate);
+					}
 				}
 				break;
 		}
@@ -437,20 +459,23 @@ public class MyHorizontalScrollView extends HorizontalScrollView implements
 		this.mListener = mListener;
 	}
 	
-	//判断相隔多少天
-	public int daysBetween(String smdate,String bdate) throws ParseException{ 
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd"); 
-		Calendar cal = Calendar.getInstance(); 
-		cal.setTime(sdf.parse(smdate)); 
-		long time1 = cal.getTimeInMillis(); 
-		cal.setTime(sdf.parse(bdate)); 
-		long time2 = cal.getTimeInMillis(); 
-		long between_days=(time2-time1)/(1000*3600*24); 
-
-		return Integer.parseInt(String.valueOf(between_days)); 
-		} 
+	
 	
 	public LinearLayout getmContainer() {
 		return mContainer;
 	}
+	
+	private String startDate;
+	private String endDate;
+	
+
+	public void setSleepDataList(List<String> sleepDataList) {
+		this.sleepDataList = sleepDataList;
+	}
+	
+	public List<String> getSleepDataList() {
+		return sleepDataList;
+	}
+	private int count = 1;
+	//private String startDate = 
 }

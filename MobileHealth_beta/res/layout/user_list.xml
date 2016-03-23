@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+    
+	<RelativeLayout 
+	    android:background="#ffffff"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent">
+	    <TextView 
+	        android:textStyle="bold"
+	        android:text=""
+	        android:padding="14dp"
+	        android:layout_gravity="center_horizontal"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:id="@+id/text"/>
+	    
+	    <TextView 
+	        android:hint=""
+	        android:text=""
+	        android:layout_gravity="center_horizontal"
+			android:layout_alignParentRight="true"
+	        android:padding="14dp"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:textColor="#B2B2B2"
+	        android:id="@+id/data"/>
+    </RelativeLayout>
+</LinearLayout>

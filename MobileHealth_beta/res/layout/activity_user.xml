@@ -264,28 +264,6 @@
 		            />
 		    </RelativeLayout>
 		    
-		    <RelativeLayout 
-		        android:paddingLeft="15dp"
-            	android:paddingRight="20dp"
-		        android:background="@color/white"
-		        android:layout_width="match_parent"
-		        android:layout_height="43dp">
-		        
-		        <TextView
-	                style="@style/showstyle"
-	                android:text="注册时间"
-	                />
-		        
-		        <View android:layout_height="1dp"
-		            android:background="#FAF0E6"
-		            android:layout_width="match_parent"
-		            android:layout_alignParentBottom="true"/>
-		        
-		        <TextView 
-		            android:id="@+id/userinfo_registertime"
-		            style="@style/anotherShowstyle"
-		            />
-		    </RelativeLayout>
 			<TextView
 			    android:id="@+id/changePwd"
 			    android:text="修改密码" 
@@ -298,6 +276,19 @@
 			    android:layout_marginTop="9dp"
 			    android:layout_width="match_parent"
 			    android:layout_marginBottom="0dp"/>
+			
+			<Button
+			    android:layout_marginTop="12dp"
+		        android:id="@+id/bt_out"
+		        android:layout_width="fill_parent"
+		        android:layout_height="42dp"
+		        android:layout_marginLeft="15dp"
+		        android:layout_marginRight="15dp"
+		        android:padding="8dp"
+		        android:text="退出"
+		        android:background="@drawable/yuanjiao3"
+		        android:textColor="@android:color/white"
+		        android:textSize="20sp" />
 		</LinearLayout>
 	</ScrollView>
 </LinearLayout>

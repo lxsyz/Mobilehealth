@@ -6,7 +6,6 @@ import java.util.List;
 
 import com.bbcc.mobilehealth.R;
 
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -34,11 +33,7 @@ public class DrawChart extends View {
 	private float offsetTop = 0;
 	private float ySpaceing = 0;
 	private float xSpaceing = 0;
-	private int l;
-	private int t;
-	private int r;
-	private int b;
-	
+
 	private int mWidth = 300;
 	private int mHeight = 400;
 	int width;
@@ -63,7 +58,6 @@ public class DrawChart extends View {
 
 	@Override
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		int widthMode = MeasureSpec.getMode(widthMeasureSpec);
 		int widthSize = MeasureSpec.getSize(widthMeasureSpec);
@@ -93,13 +87,15 @@ public class DrawChart extends View {
 		Log.v("tag", "height=" + height);
 		setMeasuredDimension(width, height);
 	}
-@Override
-protected void onLayout(boolean changed, int left, int top, int right,
-		int bottom) {
-	super.onLayout(changed, left, top, right, bottom);
-//	circleLayout.layout(l, t, r, b);
-	
-}
+
+	@Override
+	protected void onLayout(boolean changed, int left, int top, int right,
+			int bottom) {
+		super.onLayout(changed, left, top, right, bottom);
+		// circleLayout.layout(l, t, r, b);
+
+	}
+
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
@@ -117,7 +113,7 @@ protected void onLayout(boolean changed, int left, int top, int right,
 		offsetLeft = 120f;
 		offsetTop = getPaddingTop();
 		ySpaceing = usefulHeight / 6;
-		xSpaceing = (screenWidth-offsetLeft) / 99;
+		xSpaceing = (screenWidth - offsetLeft) / 99;
 	}
 
 	private void drawTable(Canvas canvas) {
@@ -136,68 +132,59 @@ protected void onLayout(boolean changed, int left, int top, int right,
 			path.lineTo(screenWidth, offsetTop + ySpaceing * i);
 			canvas.drawPath(path, paint);
 		}
-		// »­Íâ¿ò
-		// paint.setStyle(Paint.Style.STROKE);
-		// Rect chartRec = new Rect(OFFSET_LEFT, OFFSET_TOP,CHARTW+OFFSET_LEFT,
-		// CHARTH+OFFSET_TOP);
-		// canvas.drawRect(chartRec, paint);
-
-		// »­×ó±ßµÄÎÄ×Ö
-//		 Path textPath = new Path();
-//		 paint.setStyle(Paint.Style.FILL);
-//		 paint.setTextSize(15);
-//		 paint.setAntiAlias(true);
-//		 for (int i = 0; i < 6; i++) {
-//			 textPath.moveTo(5, offsetTop + ySpaceing * i);
-//			 textPath.lineTo(95, offsetTop + ySpaceing * i);
-//			 canvas.drawTextOnPath(""+(150-(1*20)), textPath, 0, 0, paint);
-//		}
 		Paint textPaint = new Paint();
 		textPaint.setColor(Color.BLACK);
 		textPaint.setTextSize(60);
 		/**
-		 * ÉèÖÃ»æÖÆÎÄ×ÖÊ±ÆðÊ¼µãX×ø±êµÄÎ»ÖÃ
-		 * CENTER:ÒÔÎÄ×ÖµÄ¿í¶ÈµÄÖÐÐÄµãÎªÆðÊ¼µãÏòÁ½±ß»æÖÆ
-		 * LEFT:ÒÔÎÄ×Ö×ó±ßÎªÆðÊ¼µãÏòÓÒ±ß¿ªÊ¼»æÖÆ
-		 * RIGHT:ÒÔÎÄ×Ö¿í¶ÈµÄÓÒ±ßÎªÆðÊ¼µãÏò×ó±ß»æÖÆ
+		 * è®¾ç½®ç»˜åˆ¶æ–‡å­—æ—¶èµ·å§‹ç‚¹Xåæ ‡çš„ä½ç½® CENTER:ä»¥æ–‡å­—çš„å®½åº¦çš„ä¸­å¿ƒç‚¹ä¸ºèµ·å§‹ç‚¹å‘ä¸¤è¾¹ç»˜åˆ¶ LEFT:ä»¥æ–‡å­—å·¦è¾¹ä¸ºèµ·å§‹ç‚¹å‘å³è¾¹å¼€å§‹ç»˜åˆ¶
+		 * RIGHT:ä»¥æ–‡å­—å®½åº¦çš„å³è¾¹ä¸ºèµ·å§‹ç‚¹å‘å·¦è¾¹ç»˜åˆ¶
 		 */
 		textPaint.setTextAlign(Paint.Align.CENTER);
-		 
-		//»ñÈ¡ÎÄ×Ö¶ÈÁ¿ÐÅÏ¢
+
+		// èŽ·å–æ–‡å­—åº¦é‡ä¿¡æ¯
 		Paint.FontMetrics fm = textPaint.getFontMetrics();
-		float textHeight = fm.descent-fm.ascent;
-		 
-		//»æÖÆÎÄ×ÖµÄ¾ØÐÎ¿ò·¶Î§
-		
-			RectF rectF = new RectF();
-			rectF.set(3, offsetTop, 117, offsetTop+textHeight);
-			canvas.drawText(String.valueOf(150), rectF.left + rectF.width() / 2, rectF.bottom-fm.descent, textPaint);
-			
-			rectF.set(3, offsetTop+ySpaceing, 117, offsetTop+textHeight+ySpaceing);
-			canvas.drawText(String.valueOf(130), rectF.left + rectF.width() / 2, rectF.bottom-fm.descent, textPaint);
-			
-			rectF.set(3, offsetTop+ySpaceing, 117, offsetTop+textHeight+2*ySpaceing);
-			canvas.drawText(String.valueOf(110), rectF.left + rectF.width() / 2, rectF.bottom-fm.descent, textPaint);
-			
-			rectF.set(3, offsetTop+ySpaceing, 117, offsetTop+textHeight+3*ySpaceing);
-			canvas.drawText(String.valueOf(90), rectF.left + rectF.width() / 2, rectF.bottom-fm.descent, textPaint);
-			
-			rectF.set(3, offsetTop+ySpaceing, 117, offsetTop+textHeight+4*ySpaceing);
-			canvas.drawText(String.valueOf(70), rectF.left + rectF.width() / 2, rectF.bottom-fm.descent, textPaint);
-			
-			rectF.set(3, offsetTop+ySpaceing, 117, offsetTop+textHeight+5*ySpaceing);
-			canvas.drawText(String.valueOf(50), rectF.left + rectF.width() / 2, rectF.bottom-fm.descent, textPaint);
-//			rectF.set(3, offsetTop+ySpaceing, 117, offsetTop+textHeight+ySpaceing);
-//			canvas.drawText(String.valueOf(30), rectF.left + rectF.width() / 2, rectF.bottom-fm.descent, textPaint);
+		float textHeight = fm.descent - fm.ascent;
+
+		// ç»˜åˆ¶æ–‡å­—çš„çŸ©å½¢æ¡†èŒƒå›´
+
+		RectF rectF = new RectF();
+		rectF.set(3, offsetTop, 117, offsetTop + textHeight);
+		canvas.drawText(String.valueOf(150), rectF.left + rectF.width() / 2,
+				rectF.bottom - fm.descent, textPaint);
+
+		rectF.set(3, offsetTop + ySpaceing, 117, offsetTop + textHeight
+				+ ySpaceing);
+		canvas.drawText(String.valueOf(130), rectF.left + rectF.width() / 2,
+				rectF.bottom - fm.descent, textPaint);
+
+		rectF.set(3, offsetTop + ySpaceing, 117, offsetTop + textHeight + 2
+				* ySpaceing);
+		canvas.drawText(String.valueOf(110), rectF.left + rectF.width() / 2,
+				rectF.bottom - fm.descent, textPaint);
+
+		rectF.set(3, offsetTop + ySpaceing, 117, offsetTop + textHeight + 3
+				* ySpaceing);
+		canvas.drawText(String.valueOf(90), rectF.left + rectF.width() / 2,
+				rectF.bottom - fm.descent, textPaint);
+
+		rectF.set(3, offsetTop + ySpaceing, 117, offsetTop + textHeight + 4
+				* ySpaceing);
+		canvas.drawText(String.valueOf(70), rectF.left + rectF.width() / 2,
+				rectF.bottom - fm.descent, textPaint);
+
+		rectF.set(3, offsetTop + ySpaceing, 117, offsetTop + textHeight + 5
+				* ySpaceing);
+		canvas.drawText(String.valueOf(50), rectF.left + rectF.width() / 2,
+				rectF.bottom - fm.descent, textPaint);
 	}
 
 	private void drawCurve(Canvas canvas) {
 		Log.v("DrawChart", "drawCurve4");
 		Paint paint = new Paint();
-		paint.setAntiAlias(true);
+		paint.setAntiAlias(false);
+		paint.setStrokeCap(Paint.Cap.ROUND);
 		paint.setColor(getResources().getColor(R.color.heartrate_curve));
-		paint.setStrokeWidth(7);
-		paint.setAntiAlias(true);
+		paint.setStrokeWidth(6);
 		if (points.size() >= 2) {
 			for (int i = 0; i < points.size() - 1; i++) {
 				canvas.drawLine(points.get(i).x, points.get(i).y,
@@ -211,27 +198,28 @@ protected void onLayout(boolean changed, int left, int top, int right,
 		float x = offsetLeft;
 		float y = 0;
 		if (rate >= 30 && rate <= 150) {
-			y = offsetTop + ((((150f - rate) / 20)-1) * ySpaceing);
+			y = offsetTop + (((150f - rate) / 20) * ySpaceing);
 			Point point = new Point((int) x, (int) y);
 			if (points.size() > 100) {
 				points.remove(0);
 				for (int i = 0; i < 99; i++) {
 					points.get(i).x += xSpaceing;
 				}
-				if (y!=0) {
+				if (y != 0) {
 					points.add(point);
 				}
 			} else {
 				for (int i = 0; i < points.size() - 1; i++) {
 					points.get(i).x += xSpaceing;
 				}
-				if (y!=0) {
+				if (y != 0) {
 					points.add(point);
 				}
 			}
 		}
-		invalidate();
-		circleLayout.layout(l, t, r, b);
+		// invalidate(false);
+		requestLayout();
+		// circleLayout.layout(l, t, r, b);
 	}
 
 	public void setCircleLayout(LinearLayout circleLayout) {
@@ -242,36 +230,5 @@ protected void onLayout(boolean changed, int left, int top, int right,
 		this.fragLayout = fragLayout;
 	}
 
-	public int getL() {
-		return l;
-	}
-
-	public void setL(int l) {
-		this.l = l;
-	}
-
-	public int getT() {
-		return t;
-	}
-
-	public void setT(int t) {
-		this.t = t;
-	}
-
-	public int getR() {
-		return r;
-	}
-
-	public void setR(int r) {
-		this.r = r;
-	}
-
-	public int getB() {
-		return b;
-	}
-
-	public void setB(int b) {
-		this.b = b;
-	}
 
 }

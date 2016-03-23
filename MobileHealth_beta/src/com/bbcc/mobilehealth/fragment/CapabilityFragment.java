@@ -91,7 +91,7 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 		// TODO Auto-generated method stub
 //		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
 //		filter.addAction("com.bbcc.mobilehealth.service.UPDATE");
-//		Log.i("tag", "×¢²á¼àÌı³É¹¦£¡");	
+//		Log.i("tag", "æ³¨å†Œç›‘å¬æˆåŠŸï¼");	
 //		activity.registerReceiver(receiver, filter);
 		context=activity;
 		super.onAttach(activity);
@@ -99,7 +99,7 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		Log.i("tag", "oncreat£¡");
+		Log.i("tag", "oncreatï¼");
 		super.onCreate(savedInstanceState);
 		
 		
@@ -124,10 +124,10 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 		}
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_ON);
 		filter.addAction("com.bbcc.mobilehealth.service.UPDATE");
-		Log.i("tag", "×¢²á¼àÌı³É¹¦£¡");
+		Log.i("tag", "æ³¨å†Œç›‘å¬æˆåŠŸï¼");
 		receiver=new MyReceiver();
 		getActivity().registerReceiver(receiver, filter);
-		Log.i("tag", "capability oncreatview£¡");
+		Log.i("tag", "capability oncreatviewï¼");
 		Context context = inflater.getContext();
 		ScrollView sv = createSimpleScrollView(context);
 		LinearLayout ll = (LinearLayout) sv.getChildAt(0);
@@ -202,7 +202,7 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
-		Log.i("tag", "ondestroy£¡");
+		Log.i("tag", "ondestroyï¼");
 		
 		super.onDestroy();
 	}
@@ -347,7 +347,7 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 			    heartrateBpm=data.getHeartrateBpm();
 			    if(heartCount==120)
 			    {
-			    	 //»ñÈ¡µ±Ç°ĞĞÎª
+			    	 //è·å–å½“å‰è¡Œä¸º
 			         String currenAction ="";
 			         if(sitCount==walkCount
 			        		 &&walkCount==runCount
@@ -393,10 +393,10 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 			        		 break;
 			         }
 			         }
-			         //Ò»·ÖÖÓÄÚµÄÆ½¾ùĞÄÂÊ
+			         //ä¸€åˆ†é’Ÿå†…çš„å¹³å‡å¿ƒç‡
 			         double bmpeverymin=heartSum/heartCount;
 			         
-			         //Ê±¼äÈÕÆÚ
+			         //æ—¶é—´æ—¥æœŸ
 			         Date now = new Date(); 
 //			         Calendar cal = Calendar.getInstance(); 
 			         DateFormat d1 = DateFormat.getDateInstance();
@@ -425,24 +425,24 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 			    	double bmp=Double.parseDouble(data.getHeartrate().toString().substring(10, 15));
 			    	if(bmp<40)
 			    	{
-						//ĞÄÂÊ¹ıµÍÒì³£
+						//å¿ƒç‡è¿‡ä½å¼‚å¸¸
 			    		NotificationCompat.Builder notificationBuilder=new NotificationCompat.Builder(context);
 						notificationBuilder.setSmallIcon(com.bbcc.mobilehealth.R.drawable.app_icon);
-						notificationBuilder.setContentTitle("ĞÄÂÊÒì³£");
-						notificationBuilder.setContentText("Ë²Ê±ĞÄÂÊÎª"+bmp+"/·Ö£¬"+"ÊôÓÚĞÄÂÊ¹ıµÍÒì³££¬Çë×¢Òâ£¡");
-						notificationBuilder.setTicker("ĞÄÂÊ¹ıµÍÒì³£");//µÚÒ»´ÎÌáÊ¾ÏûÏ¢µÄÊ±ºòÏÔÊ¾ÔÚÍ¨ÖªÀ¸ÉÏ
+						notificationBuilder.setContentTitle("å¿ƒç‡å¼‚å¸¸");
+						notificationBuilder.setContentText("ç¬æ—¶å¿ƒç‡ä¸º"+bmp+"/åˆ†ï¼Œ"+"å±äºå¿ƒç‡è¿‡ä½å¼‚å¸¸ï¼Œè¯·æ³¨æ„ï¼");
+						notificationBuilder.setTicker("å¿ƒç‡è¿‡ä½å¼‚å¸¸");//ç¬¬ä¸€æ¬¡æç¤ºæ¶ˆæ¯çš„æ—¶å€™æ˜¾ç¤ºåœ¨é€šçŸ¥æ ä¸Š
 						notificationBuilder.setNumber(12);
-						notificationBuilder.setAutoCancel(true);//×Ô¼ºÎ¬»¤Í¨ÖªµÄÏûÊ§
-						//¹¹½¨Ò»¸öIntent
+						notificationBuilder.setAutoCancel(true);//è‡ªå·±ç»´æŠ¤é€šçŸ¥çš„æ¶ˆå¤±
+						//æ„å»ºä¸€ä¸ªIntent
 						Intent resultIntent = new Intent(context,
 						ResultActivity.class);
-						//·â×°Ò»¸öIntent
+						//å°è£…ä¸€ä¸ªIntent
 						PendingIntent resultPendingIntent = PendingIntent.getActivity(
 								context, 0, resultIntent,
 						PendingIntent.FLAG_UPDATE_CURRENT);
-						// ÉèÖÃÍ¨ÖªÖ÷ÌâµÄÒâÍ¼
+						// è®¾ç½®é€šçŸ¥ä¸»é¢˜çš„æ„å›¾
 						notificationBuilder.setContentIntent(resultPendingIntent);
-						//»ñÈ¡Í¨Öª¹ÜÀíÆ÷¶ÔÏó
+						//è·å–é€šçŸ¥ç®¡ç†å™¨å¯¹è±¡
 						NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 						mNotificationManager.notify(0, notificationBuilder.build());
 			    	}
@@ -452,24 +452,24 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 			    		{
 			    			if(!tempState.equals("run"))
 			    			{
-			    				//ĞÄÂÊ¹ı¸ßÒì³£
+			    				//å¿ƒç‡è¿‡é«˜å¼‚å¸¸
 			    				NotificationCompat.Builder notificationBuilder=new NotificationCompat.Builder(context);
 								notificationBuilder.setSmallIcon(com.bbcc.mobilehealth.R.drawable.app_icon);
-								notificationBuilder.setContentTitle("ĞÄÂÊÒì³£");
-								notificationBuilder.setContentText("Ë²Ê±ĞÄÂÊÎª"+bmp+"/·Ö£¬"+"ÊôÓÚĞÄÂÊ¹ı¸ßÒì³££¬Çë×¢Òâ£¡");
-								notificationBuilder.setTicker("ĞÄÂÊ¹ıµÍÒì³£");//µÚÒ»´ÎÌáÊ¾ÏûÏ¢µÄÊ±ºòÏÔÊ¾ÔÚÍ¨ÖªÀ¸ÉÏ
+								notificationBuilder.setContentTitle("å¿ƒç‡å¼‚å¸¸");
+								notificationBuilder.setContentText("ç¬æ—¶å¿ƒç‡ä¸º"+bmp+"/åˆ†ï¼Œ"+"å±äºå¿ƒç‡è¿‡é«˜å¼‚å¸¸ï¼Œè¯·æ³¨æ„ï¼");
+								notificationBuilder.setTicker("å¿ƒç‡è¿‡ä½å¼‚å¸¸");//ç¬¬ä¸€æ¬¡æç¤ºæ¶ˆæ¯çš„æ—¶å€™æ˜¾ç¤ºåœ¨é€šçŸ¥æ ä¸Š
 								notificationBuilder.setNumber(12);
-								notificationBuilder.setAutoCancel(true);//×Ô¼ºÎ¬»¤Í¨ÖªµÄÏûÊ§
-								//¹¹½¨Ò»¸öIntent
+								notificationBuilder.setAutoCancel(true);//è‡ªå·±ç»´æŠ¤é€šçŸ¥çš„æ¶ˆå¤±
+								//æ„å»ºä¸€ä¸ªIntent
 								Intent resultIntent = new Intent(context,
 								ResultActivity.class);
-								//·â×°Ò»¸öIntent
+								//å°è£…ä¸€ä¸ªIntent
 								PendingIntent resultPendingIntent = PendingIntent.getActivity(
 										context, 0, resultIntent,
 								PendingIntent.FLAG_UPDATE_CURRENT);
-								// ÉèÖÃÍ¨ÖªÖ÷ÌâµÄÒâÍ¼
+								// è®¾ç½®é€šçŸ¥ä¸»é¢˜çš„æ„å›¾
 								notificationBuilder.setContentIntent(resultPendingIntent);
-								//»ñÈ¡Í¨Öª¹ÜÀíÆ÷¶ÔÏó
+								//è·å–é€šçŸ¥ç®¡ç†å™¨å¯¹è±¡
 								NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 								mNotificationManager.notify(0, notificationBuilder.build());
 			    			}
@@ -489,7 +489,7 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 			        runCount++;
 			        tempState="run";
 			        handler.removeCallbacks(runnable);
-			        handler.postDelayed(runnable, 60*1000);//tempstate ±£´æ1·ÖÖÓ
+			        handler.postDelayed(runnable, 60*1000);//tempstate ä¿å­˜1åˆ†é’Ÿ
 			        }
 			        else if(actionState.equals("down"))
 			        {
@@ -517,7 +517,7 @@ public abstract class CapabilityFragment extends HardwareConnectorFragment {
 		// TODO Auto-generated method stub
 		getActivity().unregisterReceiver(receiver);
 		db.close();
-		Log.i("tag", "È¡Ïû¼àÌı£¡");
+		Log.i("tag", "å–æ¶ˆç›‘å¬ï¼");
 		super.onDestroyView();
 	}
 

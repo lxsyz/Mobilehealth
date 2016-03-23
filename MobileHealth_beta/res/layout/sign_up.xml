@@ -3,9 +3,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="8dp" 
     android:background="@color/my_lightgray"
     >
+    
+    <include
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        layout="@layout/custom_title" />
     <com.bbcc.mobilehealth.view.ClearEditText
         android:id="@+id/up_username"
         android:layout_marginTop="60dp"
@@ -75,7 +79,7 @@
     <Button
         android:id="@+id/up_sign_up"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="42dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
         android:padding="8dp"

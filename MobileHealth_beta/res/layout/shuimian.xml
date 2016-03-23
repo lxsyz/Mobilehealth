@@ -74,7 +74,7 @@
                         <TextView
                             android:id="@+id/sleepTime"
                             android:layout_below="@+id/sleepTimeText"
-                            android:text="9小时"
+                            android:text="0分钟"
                             style="@style/sleepData" />
 
                     </RelativeLayout>
@@ -93,7 +93,7 @@
                         <TextView
                             android:id="@+id/deepsleep"
                             android:layout_below="@+id/deepsleeptext"
-                            android:text="9小时"
+                            android:text="0分钟"
                             style="@style/sleepData" />
                     </RelativeLayout>
                     
@@ -111,7 +111,7 @@
                         <TextView
                             android:id="@+id/qiansleep"
                             android:layout_below="@+id/qianshuiText"
-                            android:text="9小时"
+                            android:text="0分钟"
                             style="@style/sleepData" />
                         
                     </RelativeLayout>
@@ -138,7 +138,7 @@
                         <TextView
                             android:id="@+id/rushuiTime"
                             android:layout_below="@+id/rushuiText"
-                            android:text="9小时"
+                            android:text="00:00"
                             style="@style/sleepDataDown" />
                     </RelativeLayout>
 
@@ -156,7 +156,7 @@
                         <TextView
                             android:id="@+id/xinglaiTime"
                             android:layout_below="@+id/xinglaiText"
-                            android:text="9小时"
+                            android:text="00:00"
                             style="@style/sleepDataDown" />
                     </RelativeLayout>
                     
@@ -173,7 +173,7 @@
                         <TextView
                             android:id="@+id/qingxingTime"
                             android:layout_below="@+id/qingxingText"
-                            android:text="9小时"
+                            android:text="0分钟"
                             style="@style/sleepDataDown" />
                         
                     </RelativeLayout>

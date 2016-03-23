@@ -78,7 +78,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="5dp"
-            mhealth:icon="@drawable/position"
+            mhealth:icon="@drawable/sleep"
             mhealth:text="@string/tab_position"
             mhealth:text_size="12sp"
             mhealth:color="#ffff3333" />

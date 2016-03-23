@@ -76,12 +76,10 @@
             android:theme="@android:style/Theme.NoTitleBar"
             android:label="异常记录" >
         </activity>
-        
-        <activity 
-            android:label="个人信息"
+        <activity
             android:name=".PersonDataActivity"
-            android:windowSoftInputMode="stateUnchanged"
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.DeviceDefault"
+            android:label="个人信息" >
         </activity>
         <activity
             android:name=".UserInfoActivity"
@@ -94,23 +92,22 @@
             android:label="编辑区"
             android:theme="@android:style/Theme.NoTitleBar">
         </activity>
-
-        <activity 
-            android:screenOrientation="portrait"
-            android:label="显示心率"
-            android:theme="@android:style/Theme.NoTitleBar"
-            android:name=".HeartRateShowActivity">
-            
-        </activity>
-        <activity 
+         <activity 
             android:screenOrientation="portrait"
             android:label="修改密码"
             android:theme="@android:style/Theme.NoTitleBar"
-            android:name=".ChangePasswordActivity"></activity>
+            android:name=".ChangePasswordActivity">
+             
+         </activity>
         <activity
             android:name=".HealthPlanActivity"
             android:theme="@android:style/Theme.NoTitleBar"
             android:label="健康方案" >
+        </activity>
+        <activity
+            android:name=".ActionHistoryActivity"
+            android:theme="@android:style/Theme.NoTitleBar"
+            >
         </activity>
         <activity
             android:name=".StatisticsActivity"
@@ -124,6 +121,13 @@
             android:name=".DeviceDetailsActivity"
             android:label="心率详情"
             android:screenOrientation="portrait" >
+        </activity>
+          <activity 
+            android:screenOrientation="portrait"
+            android:label="显示心率"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:name=".HeartRateShowActivity">
+            
         </activity>
         <service
             android:name=".service.HardwareConnectorService"

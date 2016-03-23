@@ -62,6 +62,9 @@ public class HeartRateView extends View{
 	private float textWidth;
 	private float textHeight;
 	
+	//矩形宽度
+	private float rectWidth;
+	
 	public HeartRateView(Context context, AttributeSet attrs, int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		this.context = context;
@@ -117,12 +120,14 @@ public class HeartRateView extends View{
 		super.onDraw(canvas);
 		//disableHardwareRendering(this);
 		drawTable(canvas);
+		//将数据转换成坐标显示
 		initMaxPoints(maxData);
 		initMinPoints(minData);
 		//initData(maxData, minData);
 		//initMinPoints(minData);
 		//initMaxPoints(maxData);
-		drawPoints(canvas);
+		drawRec(canvas);
+		//drawPoints(canvas);
 	}
 	
 	
@@ -137,6 +142,7 @@ public class HeartRateView extends View{
 		
 		ySpacing = usefulHeight / 6;
 		xSpacing = (mScreenWidth - paddingLeft) / 99;
+		rectWidth = ((mScreenWidth - paddingLeft * 2) / 26.0f);
 	}
 	
 	//画表
@@ -158,32 +164,32 @@ public class HeartRateView extends View{
 		
 		RectF rectF = new RectF();
 		rectF.set(3, paddingTop, 100, paddingTop + textHeight);
-		canvas.drawText(String.valueOf(150), rectF.left + rectF.width() / 2,
+		canvas.drawText(String.valueOf(150), rectF.width() / 4,
 				rectF.bottom - fm.descent, textPaint);
 
 		rectF.set(3, paddingTop-textHeight + ySpacing, 100, paddingTop + textHeight
 				+ ySpacing);
-		canvas.drawText(String.valueOf(120), rectF.left + rectF.width() / 2,
+		canvas.drawText(String.valueOf(120), rectF.width() / 4,
 				rectF.bottom - fm.descent, textPaint);
 
 		rectF.set(3, paddingTop-textHeight / 2 + ySpacing, 100, paddingTop + textHeight + 2
 				* ySpacing);
-		canvas.drawText(String.valueOf(90), rectF.left + rectF.width() / 2,
+		canvas.drawText(String.valueOf(90), rectF.width() / 4,
 				rectF.bottom - fm.descent, textPaint);
 
 		rectF.set(3, paddingTop-textHeight / 2 + ySpacing, 100, paddingTop + textHeight + 3
 				* ySpacing);
-		canvas.drawText(String.valueOf(60), rectF.left + rectF.width() / 2,
+		canvas.drawText(String.valueOf(60), rectF.width() / 4,
 				rectF.bottom - fm.descent, textPaint);
 
 		rectF.set(3, paddingTop-textHeight / 2 + ySpacing, 100, paddingTop + textHeight + 4
 				* ySpacing);
-		canvas.drawText(String.valueOf(30), rectF.left + rectF.width() / 2,
+		canvas.drawText(String.valueOf(30), rectF.width() / 4,
 				rectF.bottom - fm.descent, textPaint);
 
 		rectF.set(3, paddingTop-textHeight / 2 + ySpacing, 100, paddingTop + textHeight + 5
 				* ySpacing);
-		canvas.drawText(String.valueOf(0), rectF.left + rectF.width() / 2,
+		canvas.drawText(String.valueOf(0), rectF.width() / 4,
 				rectF.bottom - fm.descent, textPaint);
 		
 		
@@ -198,116 +204,133 @@ public class HeartRateView extends View{
 			//path.moveTo(paddingLeft, paddingTop + ySpacing * i);
 			//path.lineTo(mScreenWidth, paddingTop + ySpacing * i);
 			//canvas.drawPath(path, paint);
-			canvas.drawLine(paddingLeft, paddingTop + ySpacing * i + textHeight / 2, mScreenWidth - paddingLeft, paddingTop + ySpacing * i + textHeight / 2, paint);
+			canvas.drawLine(paddingLeft - rectF.width() / 4, paddingTop + ySpacing * i + textHeight / 2, mScreenWidth, paddingTop + ySpacing * i + textHeight / 2, paint);
 		}
 		
 		
 		//画x轴坐标值
-		textWidth = (mScreenWidth - 2 * paddingLeft) / 9.0f;
-		pointSpacing = textWidth / 3;
-		
-		
-		rectF.set(paddingLeft + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth + 5,paddingTop + ySpacing * 5 + textHeight +textHeight);
-		canvas.drawText("12:00", rectF.left + rectF.width() / 2,
-				rectF.bottom + textHeight, textPaint);
-		
-		
-		rectF.set(paddingLeft + textWidth + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*2 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
-		canvas.drawText("3:00", rectF.left + rectF.width() / 2,
-				rectF.bottom + textHeight, textPaint);
-		
-		rectF.set(paddingLeft + textWidth * 2 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*3 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
-		canvas.drawText("6:00", rectF.left + rectF.width() / 2,
-				rectF.bottom + textHeight, textPaint);
-		
-		rectF.set(paddingLeft + textWidth * 3 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*4 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
-		canvas.drawText("9:00", rectF.left + rectF.width() / 2,
-				rectF.bottom + textHeight, textPaint);
-		
-		rectF.set(paddingLeft + textWidth * 4 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*5+ 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
-		canvas.drawText("12:00", rectF.left + rectF.width() / 2,
-				rectF.bottom + textHeight, textPaint);
-		
-		rectF.set(paddingLeft + textWidth * 5 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*6 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
-		canvas.drawText("3:00", rectF.left + rectF.width() / 2,
-				rectF.bottom + textHeight, textPaint);
-		
-		rectF.set(paddingLeft + textWidth * 6+ 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*7 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
-		canvas.drawText("6:00", rectF.left + rectF.width() / 2,
-				rectF.bottom + textHeight, textPaint);
-		
-		rectF.set(paddingLeft + textWidth * 7+ 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*8 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
-		canvas.drawText("9:00", rectF.left + rectF.width() / 2,
-				rectF.bottom + textHeight, textPaint);
-		
-		rectF.set(paddingLeft + textWidth * 8 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*9 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
-		canvas.drawText("12:00", rectF.left + rectF.width() / 2,
-				rectF.bottom + textHeight, textPaint);
+		//textWidth = (mScreenWidth - paddingLeft) / 9.0f;
+		pointSpacing = (mScreenWidth - paddingLeft) / 24.0f;
+//		
+//		
+//		rectF.set(paddingLeft + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth + 5,paddingTop + ySpacing * 5 + textHeight +textHeight);
+//		canvas.drawText("12:00", rectF.width() / 4,
+//				rectF.bottom + textHeight, textPaint);
+//		
+//		
+//		rectF.set(paddingLeft + textWidth + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*2 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
+//		canvas.drawText("3:00", rectF.width() / 4,
+//				rectF.bottom + textHeight, textPaint);
+//		
+//		rectF.set(paddingLeft + textWidth * 2 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*3 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
+//		canvas.drawText("6:00", rectF.left + rectF.width() / 2,
+//				rectF.bottom + textHeight, textPaint);
+//		
+//		rectF.set(paddingLeft + textWidth * 3 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*4 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
+//		canvas.drawText("9:00", rectF.left + rectF.width() / 2,
+//				rectF.bottom + textHeight, textPaint);
+//		
+//		rectF.set(paddingLeft + textWidth * 4 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*5+ 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
+//		canvas.drawText("12:00", rectF.left + rectF.width() / 2,
+//				rectF.bottom + textHeight, textPaint);
+//		
+//		rectF.set(paddingLeft + textWidth * 5 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*6 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
+//		canvas.drawText("3:00", rectF.left + rectF.width() / 2,
+//				rectF.bottom + textHeight, textPaint);
+//		
+//		rectF.set(paddingLeft + textWidth * 6+ 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*7 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
+//		canvas.drawText("6:00", rectF.left + rectF.width() / 2,
+//				rectF.bottom + textHeight, textPaint);
+//		
+//		rectF.set(paddingLeft + textWidth * 7+ 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*8 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
+//		canvas.drawText("9:00", rectF.left + rectF.width() / 2,
+//				rectF.bottom + textHeight, textPaint);
+//		
+//		rectF.set(paddingLeft + textWidth * 8 + 5,paddingTop + ySpacing * 5 + textHeight ,paddingLeft + textWidth*9 + 5,paddingTop + ySpacing * 5 + textHeight+textHeight);
+//		canvas.drawText("12:00", rectF.left + rectF.width() / 2,
+//				rectF.bottom + textHeight, textPaint);
 
 	}
 	
-	private void drawPoints(Canvas canvas) {
+	
+	
+	private void drawRec(Canvas canvas) {
+		//float rectWidth = ((mScreenWidth - paddingLeft * 2) / 25.0f);
 		Paint paint = new Paint();
-		paint.setColor(Color.rgb(242, 168, 117));
-		paint.setAntiAlias(true);
-		paint.setStrokeWidth(2);
 		
-		//粗线为圆发光
-		Paint paint2 = new Paint();
-		paint2.setColor(Color.rgb(242, 168, 117));
-		paint2.setAntiAlias(true);
-		paint2.setStrokeWidth(8);
-		paint2.setAlpha(40);
+		paint.setColor(Color.rgb(88, 150, 206));
 		
-		//划线
-		Paint linePaint = new Paint();
-		linePaint.setColor(Color.rgb(202, 112, 50));
-		linePaint.setStrokeWidth(4);
-		linePaint.setAntiAlias(true);
-		//粗线做发光
-		Paint linePaint2 = new Paint();
-		linePaint2.setColor(Color.rgb(202, 112, 50));
-		linePaint2.setStrokeWidth(20);
-		linePaint2.setAntiAlias(true);
-		linePaint2.setAlpha(70);
-		
-		if (maxPoints.size() >= 2) {
-			canvas.drawCircle(maxPoints.get(maxPoints.size() - 1).x, maxPoints.get(maxPoints.size() - 1).y, radius, paint);
-			canvas.drawCircle(maxPoints.get(maxPoints.size() - 1).x, maxPoints.get(maxPoints.size() - 1).y, radius*2, paint2);
-			for (int i = 0; i < maxPoints.size() - 1; i++) {
+		for (int i = 0;i < 24;i++) {
+			if (maxPoints.get(i).y == -1 || minPoints.get(i).y == -1) {
 				
-				canvas.drawCircle(maxPoints.get(i).x, maxPoints.get(i).y, radius , paint);
-				canvas.drawCircle(maxPoints.get(i).x, maxPoints.get(i).y, radius*2, paint2);
-				
-				canvas.drawLine(maxPoints.get(i).x, maxPoints.get(i).y,
-						maxPoints.get(i + 1).x, maxPoints.get(i + 1).y, linePaint);
-				canvas.drawLine(maxPoints.get(i).x, maxPoints.get(i).y,
-						maxPoints.get(i + 1).x, maxPoints.get(i + 1).y, linePaint2);
-			}
-			
-		}
-		
-		paint.setColor(Color.rgb(142, 186, 226));
-		paint2.setColor(Color.rgb(142, 186, 226));
-		paint2.setAlpha(40);
-		linePaint.setColor(Color.rgb(88, 150, 206));
-		linePaint2.setColor(Color.rgb(88, 150, 206));
-		linePaint2.setAlpha(50);
-		if (minPoints.size() >= 2) {
-			canvas.drawCircle(minPoints.get(minPoints.size() - 1).x, minPoints.get(minPoints.size() - 1).y, radius, paint);
-			canvas.drawCircle(minPoints.get(minPoints.size() - 1).x, minPoints.get(minPoints.size() - 1).y, radius*2, paint2);
-			for (int i = 0; i < minPoints.size() - 1; i++) {
-				canvas.drawCircle(minPoints.get(i).x, minPoints.get(i).y, radius , paint);
-				canvas.drawCircle(minPoints.get(i).x, minPoints.get(i).y, radius*2, paint2);
-				Log.d("i", i+" ");
-				canvas.drawLine(minPoints.get(i).x, minPoints.get(i).y,
-						minPoints.get(i + 1).x, minPoints.get(i + 1).y, linePaint);
-				canvas.drawLine(minPoints.get(i).x, minPoints.get(i).y,
-						minPoints.get(i + 1).x, minPoints.get(i + 1).y, linePaint2);
-			}
-			
+			} else 
+				canvas.drawRect(maxPoints.get(i).x - rectWidth / 2.0f, maxPoints.get(i).y, minPoints.get(i).x + rectWidth / 2.0f, minPoints.get(i).y, paint);
 		}
 	}
+	
+	
+//	private void drawPoints(Canvas canvas) {
+//		Paint paint = new Paint();
+//		paint.setColor(Color.rgb(242, 168, 117));
+//		paint.setAntiAlias(true);
+//		paint.setStrokeWidth(2);
+//		
+//		//粗线为圆发光
+//		Paint paint2 = new Paint();
+//		paint2.setColor(Color.rgb(242, 168, 117));
+//		paint2.setAntiAlias(true);
+//		paint2.setStrokeWidth(8);
+//		paint2.setAlpha(40);
+//		
+//		//划线
+//		Paint linePaint = new Paint();
+//		linePaint.setColor(Color.rgb(202, 112, 50));
+//		linePaint.setStrokeWidth(4);
+//		linePaint.setAntiAlias(true);
+//		//粗线做发光
+//		Paint linePaint2 = new Paint();
+//		linePaint2.setColor(Color.rgb(202, 112, 50));
+//		linePaint2.setStrokeWidth(20);
+//		linePaint2.setAntiAlias(true);
+//		linePaint2.setAlpha(70);
+//		
+//		if (maxPoints.size() >= 2) {
+//			canvas.drawCircle(maxPoints.get(maxPoints.size() - 1).x, maxPoints.get(maxPoints.size() - 1).y, radius, paint);
+//			canvas.drawCircle(maxPoints.get(maxPoints.size() - 1).x, maxPoints.get(maxPoints.size() - 1).y, radius*2, paint2);
+//			for (int i = 0; i < maxPoints.size() - 1; i++) {
+//				
+//				canvas.drawCircle(maxPoints.get(i).x, maxPoints.get(i).y, radius , paint);
+//				canvas.drawCircle(maxPoints.get(i).x, maxPoints.get(i).y, radius*2, paint2);
+//				
+//				canvas.drawLine(maxPoints.get(i).x, maxPoints.get(i).y,
+//						maxPoints.get(i + 1).x, maxPoints.get(i + 1).y, linePaint);
+//				canvas.drawLine(maxPoints.get(i).x, maxPoints.get(i).y,
+//						maxPoints.get(i + 1).x, maxPoints.get(i + 1).y, linePaint2);
+//			}
+//			
+//		}
+//		
+//		paint.setColor(Color.rgb(142, 186, 226));
+//		paint2.setColor(Color.rgb(142, 186, 226));
+//		paint2.setAlpha(40);
+//		linePaint.setColor(Color.rgb(88, 150, 206));
+//		linePaint2.setColor(Color.rgb(88, 150, 206));
+//		linePaint2.setAlpha(50);
+//		if (minPoints.size() >= 2) {
+//			canvas.drawCircle(minPoints.get(minPoints.size() - 1).x, minPoints.get(minPoints.size() - 1).y, radius, paint);
+//			canvas.drawCircle(minPoints.get(minPoints.size() - 1).x, minPoints.get(minPoints.size() - 1).y, radius*2, paint2);
+//			for (int i = 0; i < minPoints.size() - 1; i++) {
+//				canvas.drawCircle(minPoints.get(i).x, minPoints.get(i).y, radius , paint);
+//				canvas.drawCircle(minPoints.get(i).x, minPoints.get(i).y, radius*2, paint2);
+//				Log.d("i", i+" ");
+//				canvas.drawLine(minPoints.get(i).x, minPoints.get(i).y,
+//						minPoints.get(i + 1).x, minPoints.get(i + 1).y, linePaint);
+//				canvas.drawLine(minPoints.get(i).x, minPoints.get(i).y,
+//						minPoints.get(i + 1).x, minPoints.get(i + 1).y, linePaint2);
+//			}
+//			
+//		}
+//	}
 	
 	
 	private void initMaxPoints(int[] maxData) {
@@ -319,7 +342,14 @@ public class HeartRateView extends View{
 		float y = 0;
 		float firstY = 0;	//记录第一个点
 		for (int i = 0;i < 24;i++) {
-			if (maxData[i] > 30 && maxData[i] <= 150) {
+			
+			
+			if (maxData[i] == 0) {
+				y = -1;
+				Point point = new Point((int)x,(int)y);
+				maxPoints.add(point);
+			}
+			else if (maxData[i] > 10 && maxData[i] <= 150) {
 				y = paddingTop + ((((150 - maxData[i]) / 30.0f)) * ySpacing + textHeight / 2.0f);
 				if (i== 0) firstY = y;
 				Point point = new Point((int)x,(int)y);
@@ -332,7 +362,7 @@ public class HeartRateView extends View{
 		//最后一个 跟第一个点数据一样
 		//x += pointSpacing;
 		//Log.d("x,y",maxPoints.get(0).x+" "+maxPoints.get(0).y+" ");
-		maxPoints.add(new Point((int)x,(int)firstY));
+		//maxPoints.add(new Point((int)x,(int)firstY));
 	}
 	
 	private void initMinPoints(int[] minData) {
@@ -342,7 +372,12 @@ public class HeartRateView extends View{
 		float y = 0;
 		float firstY = 0; // 记录第一个点
 		for (int i = 0; i < 24; i++) {
-			if (minData[i] > 0 && minData[i] <= 150) {
+			if (maxData[i] == 0) {
+				y = -1;
+				Point point = new Point((int)x,(int)y);
+				maxPoints.add(point);
+			}
+			else if (minData[i] > 0 && minData[i] <= 150) {
 				y = paddingTop
 						+ ((((150 - minData[i]) / 30.0f)) * ySpacing + textHeight / 2.0f);
 				if (i == 0)
@@ -357,7 +392,7 @@ public class HeartRateView extends View{
 		// 最后一个 跟第一个点数据一样
 		// x += pointSpacing;
 
-		minPoints.add(new Point((int) x, (int) firstY));
+		//minPoints.add(new Point((int) x, (int) firstY));
 	}
 	
 	public void initData(int[] maxData,int[] minData) {
@@ -367,9 +402,4 @@ public class HeartRateView extends View{
 		invalidate();
 	}
 	
-//	public void disableHardwareRendering(View v) {
-//		if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-//			v.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
-//		} 
-//	}
 }

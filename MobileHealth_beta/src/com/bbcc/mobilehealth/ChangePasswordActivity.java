@@ -12,12 +12,17 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class ChangePasswordActivity extends Activity implements OnClickListener{
@@ -27,12 +32,13 @@ public class ChangePasswordActivity extends Activity implements OnClickListener{
 	private ClearEditText sure_pwd;
 	
 	private Button confirmButton;
-	
+	private ImageView bt_left;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.changepwd);
+		initWindow();
 		initView();
 	}
 	
@@ -41,8 +47,10 @@ public class ChangePasswordActivity extends Activity implements OnClickListener{
 		newPwd = (ClearEditText)findViewById(R.id.new_password);
 		sure_pwd = (ClearEditText)findViewById(R.id.sure_new_password);
 		confirmButton = (Button)findViewById(R.id.confirm);
+		bt_left = (ImageView)findViewById(R.id.bt_left);
 		
 		confirmButton.setOnClickListener(this);
+		bt_left.setOnClickListener(this);
 	}
 
 	@Override
@@ -69,7 +77,7 @@ public class ChangePasswordActivity extends Activity implements OnClickListener{
 				confirmButton.setClickable(false);
 				confirmButton.setBackgroundResource(R.drawable.yuanjiao2);
 				RequestParams params = new RequestParams();
-				params.put("phoneNumber", "13006152436");
+				params.put("phoneNumber", Constant.PHONE_NUMBER);
 				params.put("password", MD5.MD5Encode(srcPwd.getText().toString()));
 				params.put("newPassword", MD5.MD5Encode(newPwd.getText().toString()));
 				AsyncHttpClient client = new AsyncHttpClient();
@@ -85,12 +93,14 @@ public class ChangePasswordActivity extends Activity implements OnClickListener{
 							
 							String res = jsonObject.getString("code");
 							Log.d("status",arg0+" ");
+							Log.d("res", res+" ");
+							Log.d("res", response+" ");
 							if (res.equals("2")) {
 								Toast.makeText(ChangePasswordActivity.this, "修改成功", 2000).show();
 								ChangePasswordActivity.this.finish();
 							} else if (res.equals("1")) 
 								Toast.makeText(ChangePasswordActivity.this, "原密码错误,修改失败", 2000).show();
-								confirmButton.setText("注册");
+								confirmButton.setText("确定");
 								confirmButton.setClickable(true);
 								confirmButton.setBackgroundResource(R.drawable.yuanjiao);
 						} catch (JSONException e) {
@@ -101,18 +111,28 @@ public class ChangePasswordActivity extends Activity implements OnClickListener{
 					@Override
 					public void onFailure(int arg0, Header[] arg1, byte[] arg2, Throwable error) {
 						Toast.makeText(ChangePasswordActivity.this, "修改失败,请检查网络设置,", 2000).show();
-						confirmButton.setText("注册");
+						confirmButton.setText("确定");
 						confirmButton.setClickable(true);
 						confirmButton.setBackgroundResource(R.drawable.yuanjiao);
 						error.printStackTrace();
 					}
 				});
 			break;
-
+		
+		case R.id.bt_left:
+			
+			ChangePasswordActivity.this.finish();
+			break;
+			
 		default:
 			break;
 		}
 	}
 	
-	
+	private void initWindow() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			getWindow().addFlags(
+					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		}
+	}
 }

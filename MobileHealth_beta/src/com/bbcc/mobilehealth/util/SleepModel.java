@@ -4,14 +4,21 @@ import android.R.integer;
 
 public class SleepModel {
 	
-	private int percent;	//占总时间百分比
-	
+	private int percent;	//
 	private int deepSleepTime;
 	private int qianSleepTime;
-	private int state;		//睡眠状态
+	private int state;		//
 	
-	private String time;	//睡眠时间
+	private String time;	//
+	private int rate;	//心率
 
+	public int getRate() {
+		return rate;
+	}
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
+	
 	public int getPercent() {
 		return percent;
 	}

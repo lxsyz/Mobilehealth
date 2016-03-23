@@ -8,10 +8,10 @@ import android.view.animation.Interpolator;
 import android.widget.Scroller;
 
 public class ViewPagerScroller extends Scroller {
-    private int mScrollDuration = 2000;             // 滑动速度
+    private int mScrollDuration = 2000;             // 婊戝姩閫熷害
   
     /**
-     * 设置速度速度
+     * 璁剧疆閫熷害閫熷害
      * @param duration
      */
     public void setScrollDuration(int duration){

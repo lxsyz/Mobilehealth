@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="view_color">#faf0e6</color>
+    <color name="act_action_history_title">#FF6867</color>
+    <color name="act_action_history_backg">#404040</color>
     <color name="heartrate_curve">#E41C22</color>
     <color name="main_color">#2EAA4C</color>
     <color name="main_item_color">#016640</color>
@@ -329,5 +332,4 @@
     <color name="black">#000000</color>
  <!-- 黑色 -->
 
-	<color name="view_color">#faf0e6</color>
 </resources>

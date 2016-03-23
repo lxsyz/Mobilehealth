@@ -42,13 +42,13 @@ import com.bbcc.mobilehealth.util.StatisticsTable;
 
 public class SettingActivity extends Activity implements OnCheckedChangeListener, OnClickListener {
 
-	private ToggleButton setting_toggleButton1;//wifi×Ô¶¯ÉÏ´«
-	private ToggleButton setting_toggleButton2;//ÉÏ´«Êı¾İºó×Ô¶¯É¾³ı
-	private ToggleButton setting_toggleButton3;//½ÓÊÕ½¡¿µ·½°¸ÍÆËÍ
+	private ToggleButton setting_toggleButton1;//wifiè‡ªåŠ¨ä¸Šä¼ 
+	private ToggleButton setting_toggleButton2;//ä¸Šä¼ æ•°æ®åè‡ªåŠ¨åˆ é™¤
+	private ToggleButton setting_toggleButton3;//æ¥æ”¶å¥åº·æ–¹æ¡ˆæ¨é€
 	private ToggleButton setting_toggleButton4;
 	private ToggleButton setting_toggleButton5;
-	private Button setting_upload;//ÉÏ´«±¾»úÊı¾İ
-	private Button setting_delete;//É¾³ı±¾»úÊı¾İ
+	private Button setting_upload;//ä¸Šä¼ æœ¬æœºæ•°æ®
+	private Button setting_delete;//åˆ é™¤æœ¬æœºæ•°æ®
 	private ImageButton setting_back;
 	private SharedPreferences settings ;
 	private SharedPreferences.Editor editor;
@@ -228,32 +228,32 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 			NetworkInfo info = connectMgr.getActiveNetworkInfo();
 			if(info==null)
 			{
-				Toast.makeText(this, "Î´ÁªÍø,ÇëÁªÍøºóÉÏ´«Êı¾İ£¡", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "æœªè”ç½‘,è¯·è”ç½‘åä¸Šä¼ æ•°æ®ï¼", Toast.LENGTH_LONG).show();
 			}
 			else if(info.getType() == ConnectivityManager.TYPE_WIFI)
 			{
-				Toast.makeText(this, "µ±Ç°ÍøÂçÎªWifi£¬¿ÉÒÔ·ÅĞÄÉÏ´«Êı¾İ", Toast.LENGTH_LONG).show();
+				Toast.makeText(this, "å½“å‰ç½‘ç»œä¸ºWifiï¼Œå¯ä»¥æ”¾å¿ƒä¸Šä¼ æ•°æ®", Toast.LENGTH_LONG).show();
 				
-				//ÉÏ´«Êı¾İ
+				//ä¸Šä¼ æ•°æ®
 				 new upLoadTask().execute();
 				
 			}
 			else if(info.getType() ==ConnectivityManager.TYPE_MOBILE)
 			{
-				//ÌáÊ¾¿ò
+				//æç¤ºæ¡†
 				AlertDialog.Builder builder = new Builder(this);
-				  builder.setMessage("µ±Ç°ÍøÂçÎªÊÖ»úÍøÂç£¬ÊÇ·ñ¼ÌĞøÉÏ´«Êı¾İ");
-				  builder.setTitle("ÌáÊ¾");
-				  builder.setPositiveButton("È·ÈÏ", new DialogInterface.OnClickListener() {
+				  builder.setMessage("å½“å‰ç½‘ç»œä¸ºæ‰‹æœºç½‘ç»œï¼Œæ˜¯å¦ç»§ç»­ä¸Šä¼ æ•°æ®");
+				  builder.setTitle("æç¤º");
+				  builder.setPositiveButton("ç¡®è®¤", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int witch) {
 					// TODO Auto-generated method stub
 					 dialog.dismiss();	 
-					 //ÉÏ´«Êı¾İ
+					 //ä¸Šä¼ æ•°æ®
 					 new upLoadTask().execute();
 				}
 				  });
-				  builder.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+				  builder.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int witch) {
 					// TODO Auto-generated method stub
@@ -263,15 +263,15 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 			break;
 		case R.id.setting_delete:
 			  AlertDialog.Builder builder = new Builder(this);
-			  System.out.println("É¾³ıÊı¾İ");
-			  builder.setMessage("±¾»úÊı¾İÉ¾³ıºó²»¿É»Ö¸´£¬È·ÈÏÉ¾³ı£¿");
-			  builder.setTitle("ÌáÊ¾");
-			  builder.setPositiveButton("È·ÈÏ", new DialogInterface.OnClickListener() {
+			  System.out.println("åˆ é™¤æ•°æ®");
+			  builder.setMessage("æœ¬æœºæ•°æ®åˆ é™¤åä¸å¯æ¢å¤ï¼Œç¡®è®¤åˆ é™¤ï¼Ÿ");
+			  builder.setTitle("æç¤º");
+			  builder.setPositiveButton("ç¡®è®¤", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int witch) {
 				// TODO Auto-generated method stub
 				 dialog.dismiss();	 
-				 //É¾³ıÊı¾İ
+				 //åˆ é™¤æ•°æ®
 				    MyDBHelp myDbHelp=new MyDBHelp(SettingActivity.this);
 					SQLiteDatabase db= myDbHelp.getWritableDatabase();
 					db.execSQL("delete from "+MyDBHelp.HAATABLE+";");
@@ -281,7 +281,7 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 					db.close();
 			}
 			  });
-			  builder.setNegativeButton("È¡Ïû", new DialogInterface.OnClickListener() {
+			  builder.setNegativeButton("å–æ¶ˆ", new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int witch) {
 				// TODO Auto-generated method stub
@@ -296,7 +296,7 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 				break;
 		}
 	}
-	//ÉÏ´«Êı¾İ
+	//ä¸Šä¼ æ•°æ®
 	private class upLoadTask extends AsyncTask <Void,Void,Void>{
 
 		@Override
@@ -311,14 +311,14 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 			Date date = null;
 			sdf = new SimpleDateFormat("yyyy-MM-DD ahh:mm:ss");
 			
-			//ÉÏ´«HAA±íÊı¾İ
-			//²éÑ¯HAA±íÖĞËùÓĞÊı¾İ
+			//ä¸Šä¼ HAAè¡¨æ•°æ®
+			//æŸ¥è¯¢HAAè¡¨ä¸­æ‰€æœ‰æ•°æ®
 			cursor = db.rawQuery("select * from "+MyDBHelp.HAATABLE+" where objectId=?",new String[]{userId});
 			List<BmobObject> bmobObjects=new ArrayList<BmobObject>();
 			if(cursor.getCount()==0)
 			{
-				//Toast.makeText(SettingActivity.this, "Êı¾İÒÑÉ¾³ı£¡", Toast.LENGTH_LONG).show();
-				Log.i("tag",  "HAA±íÊı¾İÒÑÉ¾³ı£¡");
+				//Toast.makeText(SettingActivity.this, "æ•°æ®å·²åˆ é™¤ï¼", Toast.LENGTH_LONG).show();
+				Log.i("tag",  "HAAè¡¨æ•°æ®å·²åˆ é™¤ï¼");
 			}
 			else
 			{
@@ -334,13 +334,13 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 						@Override
 						public void onFailure(int code, String msg) {
 							// TODO Auto-generated method stub
-							Log.i("tag","ÅúÁ¿Ìí¼ÓHAAÊı¾İÊ§°Ü:"+code+" "+msg);
+							Log.i("tag","æ‰¹é‡æ·»åŠ HAAæ•°æ®å¤±è´¥:"+code+" "+msg);
 						}
 
 						@Override
 						public void onSuccess() {
 							// TODO Auto-generated method stub
-							Log.i("tag","ÅúÁ¿Ìí¼ÓHAAÊı¾İ³É¹¦£¡");
+							Log.i("tag","æ‰¹é‡æ·»åŠ HAAæ•°æ®æˆåŠŸï¼");
 							
 						}});
 					bmobObjects.clear();
@@ -366,41 +366,41 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 			    @Override
 			    public void onSuccess() {
 			        // TODO Auto-generated method stub
-			        Log.i("tag","Ìí¼ÓÊı¾İ³É¹¦"); 
+			        Log.i("tag","æ·»åŠ æ•°æ®æˆåŠŸ"); 
 			    }
 			    @Override
 			    public void onFailure(int code, String msg) {
 			        // TODO Auto-generated method stub
-			        // Ìí¼ÓÊ§°Ü
-			    	Log.i("tag","Ìí¼ÓÊı¾İÊ§°Ü:"+msg);
+			        // æ·»åŠ å¤±è´¥
+			    	Log.i("tag","æ·»åŠ æ•°æ®å¤±è´¥:"+msg);
 			    }
 			});*/ 
 			}
-			//ÅúÁ¿²åÈëÊı¾İ
+			//æ‰¹é‡æ’å…¥æ•°æ®
 			tempBo.insertBatch(SettingActivity.this, bmobObjects, new SaveListener(){
 
 				@Override
 				public void onFailure(int code, String msg) {
 					// TODO Auto-generated method stub
-					Log.i("tag","ÅúÁ¿Ìí¼ÓÊı¾İÊ§°Ü:"+code+" "+msg);
+					Log.i("tag","æ‰¹é‡æ·»åŠ æ•°æ®å¤±è´¥:"+code+" "+msg);
 				}
 
 				@Override
 				public void onSuccess() {
 					// TODO Auto-generated method stub
-					Log.i("tag","ÅúÁ¿Ìí¼ÓÊı¾İ³É¹¦£¡");
+					Log.i("tag","æ‰¹é‡æ·»åŠ æ•°æ®æˆåŠŸï¼");
 					
 				}});
 			  bmobObjects.clear();
 			  count=0;
 			  
-			//ÉÏ´«Òì³£±í
+			//ä¸Šä¼ å¼‚å¸¸è¡¨
 				ExceptionTable execTable=new ExceptionTable();
 				
 					cursor = db.rawQuery("select * from "+MyDBHelp.EXCEPTIONTABLE+" where objectId=?",new String[]{userId});
 					if(cursor.getCount()==0)
 					{
-						Log.i("tag",  "HAA±íÊı¾İÒÑÉ¾³ı£¡");
+						Log.i("tag",  "HAAè¡¨æ•°æ®å·²åˆ é™¤ï¼");
 					}
 					else
 					{
@@ -413,13 +413,13 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 								@Override
 								public void onFailure(int code, String msg) {
 									// TODO Auto-generated method stub
-									Log.i("tag","ÅúÁ¿excpÌí¼ÓÊı¾İÊ§°Ü:"+code+" "+msg);
+									Log.i("tag","æ‰¹é‡excpæ·»åŠ æ•°æ®å¤±è´¥:"+code+" "+msg);
 								}
 
 								@Override
 								public void onSuccess() {
 									// TODO Auto-generated method stub
-									Log.i("tag","ÅúÁ¿excpÌí¼ÓÊı¾İ³É¹¦£¡");
+									Log.i("tag","æ‰¹é‡excpæ·»åŠ æ•°æ®æˆåŠŸï¼");
 									
 								}});
 							bmobObjects.clear();
@@ -445,13 +445,13 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 					    @Override
 					    public void onSuccess() {
 					        // TODO Auto-generated method stub
-					        //Log.i("tag","Ìí¼ÓÊı¾İ³É¹¦"); 
+					        //Log.i("tag","æ·»åŠ æ•°æ®æˆåŠŸ"); 
 					    }
 					    @Override
 					    public void onFailure(int code, String msg) {
 					        // TODO Auto-generated method stub
-					        // Ìí¼ÓÊ§°Ü
-					    	Log.i("tag","Ìí¼ÓÊı¾İÊ§°Ü:"+msg);
+					        // æ·»åŠ å¤±è´¥
+					    	Log.i("tag","æ·»åŠ æ•°æ®å¤±è´¥:"+msg);
 					    }
 					});*/
 					}
@@ -462,25 +462,25 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 					@Override
 					public void onFailure(int code, String msg) {
 						// TODO Auto-generated method stub
-						Log.i("tag","ÅúÁ¿excpÌí¼ÓÊı¾İÊ§°Ü:"+code+" "+msg);
+						Log.i("tag","æ‰¹é‡excpæ·»åŠ æ•°æ®å¤±è´¥:"+code+" "+msg);
 					}
 					@Override
 					public void onSuccess() {
 						// TODO Auto-generated method stub
-						Log.i("tag","ÅúÁ¿excpÌí¼ÓÊı¾İ³É¹¦£¡");
+						Log.i("tag","æ‰¹é‡excpæ·»åŠ æ•°æ®æˆåŠŸï¼");
 						
 					}});
 				  bmobObjects.clear();
 				  count=0;
 					}
 				  
-			//ÉÏ´«Í³¼Æ±í
+			//ä¸Šä¼ ç»Ÿè®¡è¡¨
 			    StatisticsTable statisticsTable=new StatisticsTable();
 				cursor = db.rawQuery("select * from "+MyDBHelp.STATISTICSTABLE+" where objectId=?",new String[]{userId});
 				if(cursor.getCount()==0)
 				{
-					//Toast.makeText(SettingActivity.this, "Êı¾İÒÑÉ¾³ı£¡", Toast.LENGTH_LONG).show();
-					Log.i("tag",  "Statistics±íÊı¾İÒÑÉ¾³ı£¡");
+					//Toast.makeText(SettingActivity.this, "æ•°æ®å·²åˆ é™¤ï¼", Toast.LENGTH_LONG).show();
+					Log.i("tag",  "Statisticsè¡¨æ•°æ®å·²åˆ é™¤ï¼");
 				}
 				else
 				{
@@ -493,13 +493,13 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 							@Override
 							public void onFailure(int code, String msg) {
 								// TODO Auto-generated method stub
-								Log.i("tag","ÅúÁ¿Ìí¼ÓStatisticsÊı¾İÊ§°Ü:"+code+" "+msg);
+								Log.i("tag","æ‰¹é‡æ·»åŠ Statisticsæ•°æ®å¤±è´¥:"+code+" "+msg);
 							}
 
 							@Override
 							public void onSuccess() {
 								// TODO Auto-generated method stub
-								Log.i("tag","ÅúÁ¿Ìí¼ÓStatisticsÊı¾İ³É¹¦£¡");
+								Log.i("tag","æ‰¹é‡æ·»åŠ Statisticsæ•°æ®æˆåŠŸï¼");
 								
 							}});
 						bmobObjects.clear();
@@ -527,13 +527,13 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 				    @Override
 				    public void onSuccess() {
 				        // TODO Auto-generated method stub
-				        //Log.i("tag","Ìí¼ÓÊı¾İ³É¹¦"); 
+				        //Log.i("tag","æ·»åŠ æ•°æ®æˆåŠŸ"); 
 				    }
 				    @Override
 				    public void onFailure(int code, String msg) {
 				        // TODO Auto-generated method stub
-				        // Ìí¼ÓÊ§°Ü
-				    	Log.i("tag","Ìí¼ÓÊı¾İÊ§°Ü:"+msg);
+				        // æ·»åŠ å¤±è´¥
+				    	Log.i("tag","æ·»åŠ æ•°æ®å¤±è´¥:"+msg);
 				    }
 				});*/
 				}
@@ -543,12 +543,12 @@ public class SettingActivity extends Activity implements OnCheckedChangeListener
 					@Override
 					public void onFailure(int code, String msg) {
 						// TODO Auto-generated method stub
-						Log.i("tag","ÅúÁ¿Ìí¼ÓStatisticsÊı¾İÊ§°Ü:"+code+" "+msg);
+						Log.i("tag","æ‰¹é‡æ·»åŠ Statisticsæ•°æ®å¤±è´¥:"+code+" "+msg);
 					}
 					@Override
 					public void onSuccess() {
 						// TODO Auto-generated method stub
-						Log.i("tag","ÅúÁ¿Ìí¼ÓStatisticsÊı¾İ³É¹¦£¡");
+						Log.i("tag","æ‰¹é‡æ·»åŠ Statisticsæ•°æ®æˆåŠŸï¼");
 						
 					}});
 				  bmobObjects.clear();

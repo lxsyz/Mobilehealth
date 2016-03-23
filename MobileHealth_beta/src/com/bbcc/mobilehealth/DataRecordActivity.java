@@ -34,12 +34,12 @@ public class DataRecordActivity extends Activity implements  OnScrollListener {
 	private LinearLayout loadLayout;
 	private ArrayList<String> items;
 	private DatabaseHelper service;
-	private int currentPage = 1; //Ä¬ÈÏÔÚµÚÒ»Ò³
-    private int allRecorders = 0;  //È«²¿¼ÇÂ¼Êı
-	private int pageSize = 1;  //Ä¬ÈÏ¹²Ò»Ò³
+	private int currentPage = 1; //é»˜è®¤åœ¨ç¬¬ä¸€é¡µ
+    private int allRecorders = 0;  //å…¨éƒ¨è®°å½•æ•°
+	private int pageSize = 1;  //é»˜è®¤å…±ä¸€é¡µ
 	private int lastItem;
 	private MyBaseAdapter baseAdapter;
-	private static final int lineSize = 25;    //Ã¿´ÎÏÔÊ¾Êı
+	private static final int lineSize = 25;    //æ¯æ¬¡æ˜¾ç¤ºæ•°
 	
 //	private String selDateString;
 //	
@@ -53,7 +53,7 @@ public class DataRecordActivity extends Activity implements  OnScrollListener {
 		Bmob.initialize(this, "b51e3eb59f6e65de81096688de413362");
 		
 		data_back=(ImageButton) findViewById(R.id.data_back);
-		userId=BmobUser.getCurrentUser(this).getObjectId();//»ñÈ¡µ±Ç°ÓÃ»§µÄId
+		userId=BmobUser.getCurrentUser(this).getObjectId();//è·å–å½“å‰ç”¨æˆ·çš„Id
 		Log.i("tag",userId);
 		data_back.setOnClickListener(new OnClickListener(){
 
@@ -67,7 +67,7 @@ public class DataRecordActivity extends Activity implements  OnScrollListener {
 		loadLayout=new LinearLayout(this);
 		loadLayout.setGravity(Gravity.CENTER);
 		loadInfo=new TextView(this);
-		loadInfo.setText("Å¬Á¦¼ÓÔØÖĞ¡£¡£¡£");
+		loadInfo.setText("åŠªåŠ›åŠ è½½ä¸­ã€‚ã€‚ã€‚");
 		loadInfo.setGravity(Gravity.CENTER);
 		loadLayout.addView(loadInfo,new LayoutParams(
 		        LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -80,7 +80,7 @@ public class DataRecordActivity extends Activity implements  OnScrollListener {
 		// TODO Auto-generated method stub
 		service = new DatabaseHelper(this);
 	    allRecorders = service.getCount(userId);
-	    //¼ÆËã×ÜÒ³Êı
+	    //è®¡ç®—æ€»é¡µæ•°
 	    pageSize = (allRecorders + lineSize -1) / lineSize;  
 	    System.out.println("allRecorders =  " + allRecorders);
 	    System.out.println("pageSize  =  " + pageSize);
@@ -101,7 +101,7 @@ public class DataRecordActivity extends Activity implements  OnScrollListener {
 	    }
 	    else
 	    {
-	    	Toast.makeText(this, "±¾»úÃ»ÓĞÊı¾İ£¡", Toast.LENGTH_LONG).show();
+	    	Toast.makeText(this, "æœ¬æœºæ²¡æœ‰æ•°æ®ï¼", Toast.LENGTH_LONG).show();
 	    }
 //	   
    	    
@@ -112,13 +112,13 @@ public class DataRecordActivity extends Activity implements  OnScrollListener {
 		    ArrayList<String> additems = service.getAllItems(userId,currentPage, lineSize);
 		    System.out.println("additems.size();"+  additems.size());
 		    baseAdapter.setCount(baseAdapter.getCount() + additems.size());
-		    //ÅĞ¶Ï£¬Èç¹ûµ½ÁË×îÄ©Î²ÔòÈ¥µô¡°ÕıÔÚ¼ÓÔØ¡±
+		    //åˆ¤æ–­ï¼Œå¦‚æœåˆ°äº†æœ€æœ«å°¾åˆ™å»æ‰â€œæ­£åœ¨åŠ è½½â€
 		   
 		    if(allRecorders == baseAdapter.getCount()){
 		      listView.removeFooterView(loadLayout);
 		    }
 		    items.addAll(additems);
-		    //Í¨Öª¼ÇÂ¼¸Ä±ä
+		    //é€šçŸ¥è®°å½•æ”¹å˜
 		    baseAdapter.notifyDataSetChanged();
 		    for(int i=0; i<additems.size(); i++){
 			      System.out.println(additems.get(i));
@@ -133,7 +133,7 @@ public class DataRecordActivity extends Activity implements  OnScrollListener {
 		      int totalCount) {
 		// TODO Auto-generated method stub
 		
-		lastItem = firstVisible + visibleCount - 1; //Í³¼ÆÊÇ·ñµ½×îºó
+		lastItem = firstVisible + visibleCount - 1; //ç»Ÿè®¡æ˜¯å¦åˆ°æœ€å
 		System.out.println(lastItem);
 		
 	}
@@ -141,20 +141,20 @@ public class DataRecordActivity extends Activity implements  OnScrollListener {
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scorllState) {
 		// TODO Auto-generated method stub
-		System.out.println("½øÈë¹ö¶¯½çÃæÁË");
-	    //ÊÇ·ñµ½×îµ×²¿²¢ÇÒÊı¾İÃ»¶ÁÍê
+		System.out.println("è¿›å…¥æ»šåŠ¨ç•Œé¢äº†");
+	    //æ˜¯å¦åˆ°æœ€åº•éƒ¨å¹¶ä¸”æ•°æ®æ²¡è¯»å®Œ
 	    if(lastItem == baseAdapter.getCount() 
-	        && currentPage < pageSize    //²»ÔÙ¹ö¶¯
+	        && currentPage < pageSize    //ä¸å†æ»šåŠ¨
 	        && scorllState == OnScrollListener.SCROLL_STATE_IDLE){
 	      currentPage =currentPage+1;
-	      //ÉèÖÃÏÔÊ¾Î»ÖÃ
+	      //è®¾ç½®æ˜¾ç¤ºä½ç½®
 	      listView.setSelection(lastItem);
-	      //Ôö¼ÓÊı¾İ
+	      //å¢åŠ æ•°æ®
 	      appendData();
-	      System.out.println("¼ÓÔØµÚ"+currentPage+"Êı¾İ");
+	      System.out.println("åŠ è½½ç¬¬"+currentPage+"æ•°æ®");
 	    }
 	    else{
-	    	System.out.println("Êı¾İ¼ÓÔØÒÑÍê±Ï");
+	    	System.out.println("æ•°æ®åŠ è½½å·²å®Œæ¯•");
 	    }
 	}
 	private class MyBaseAdapter extends BaseAdapter {

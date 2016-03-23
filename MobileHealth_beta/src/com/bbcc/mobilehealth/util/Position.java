@@ -5,9 +5,9 @@ import cn.bmob.v3.datatype.BmobDate;
 
 public class Position extends BmobObject {
 	private BmobDate time;
-	private double latitude;//纬度
-	private double longitude;//经度
-	private String address;//地址
+	private double latitude;//绾害
+	private double longitude;//缁忓害
+	private String address;//鍦板潃
 	private String userId;//userId
 	public BmobDate getTime() {
 		return time;

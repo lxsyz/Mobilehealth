@@ -2,6 +2,9 @@ package com.bbcc.mobilehealth;
 
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.apache.http.Header;
 
 import com.bbcc.mobilehealth.util.Constant;
@@ -13,6 +16,7 @@ import cn.bmob.v3.listener.UploadBatchListener;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -45,6 +49,11 @@ public class EditActivity extends Activity implements OnClickListener{
     	textView.setText(intent.getStringExtra("tips"));
     	
     	resultType = intent.getIntExtra("result",-1);
+    	if (resultType == 24) {
+    		ed.setHint("单位：厘米");
+    	} else if (resultType == 23) {
+    		ed.setHint("单位：千克");
+    	}
     }
     
     private void initView() {
@@ -67,9 +76,21 @@ public class EditActivity extends Activity implements OnClickListener{
 			this.finish();
 			break;
 		case R.id.bt_right:
-			if (resultType == 26) {
-				if (ed.getText().toString().trim().length() != 11) {
-					Toast.makeText(this, "请输入正确的手机号码", 2000).show();
+			//判断工作
+			Pattern p = Pattern.compile("[0-9]*"); 
+		    Matcher m = p.matcher(ed.getText().toString()); 
+			if (resultType == 23) {
+				
+			} else if (resultType == 24){
+				if (!m.matches()) {
+					
+					Toast.makeText(EditActivity.this,"请输入数字", Toast.LENGTH_SHORT).show();
+					return;
+				}
+			} else if (resultType == 25) {
+				if (!m.matches()) {
+					
+					Toast.makeText(EditActivity.this,"请输入数字", Toast.LENGTH_SHORT).show();
 					return;
 				}
 			}

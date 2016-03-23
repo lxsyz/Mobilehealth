@@ -1,4 +1,4 @@
-﻿package com.bbcc.mobilehealth;
+package com.bbcc.mobilehealth;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -82,10 +82,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 	private ChangeIconColorWithText one;
 	private ChangeIconColorWithText two;
 	private ChangeIconColorWithText three;
-	private LinearLayout item1 = null;
-	private LinearLayout item2 = null;
-	private LinearLayout item3 = null;
-	private LinearLayout item4 = null;
 	private String userId;
 	private String contact;
 	private String name;
@@ -199,12 +195,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		one.setOnClickListener(this);
 		two.setOnClickListener(this);
 		three.setOnClickListener(this);
-		// four.setOnClickListener(this);
+//		 four.setOnClickListener(this);
 		viewPager.setOnPageChangeListener(this);
-//		item1.setOnClickListener(this);
-//		item2.setOnClickListener(this);
-//		item3.setOnClickListener(this);
-//		item4.setOnClickListener(this);
 	}
 
 	private void initDatas() {
@@ -293,10 +285,6 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		one = (ChangeIconColorWithText) findViewById(R.id.id_indicator_one);
 		two = (ChangeIconColorWithText) findViewById(R.id.id_indicator_two);
 		three = (ChangeIconColorWithText) findViewById(R.id.id_indicator_three);
-		item1= (LinearLayout) findViewById(R.id.homepage_item1);
-		item2 = (LinearLayout) findViewById(R.id.homepage_item2);
-		item3 = (LinearLayout) findViewById(R.id.homepage_item3);
-		item4 = (LinearLayout) findViewById(R.id.homepage_item4);
 		mIndicators.add(homeIcon);
 		mIndicators.add(one);
 		mIndicators.add(two);
@@ -310,25 +298,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener,
 		// mIndicators.get(viewPager.getCurrentItem()).setIconAlpha(1.0f);
 		// viewPager.setCurrentItem(0,false);
 		clickTab(v, viewPager);
-		Intent intent=null;
-		switch (v.getId()) {
 		
-		case R.id.homepage_item1:
-			intent=new Intent(this,SignUpActivity.class);
-			break;
-		case R.id.homepage_item2:
-			intent=new Intent(this, PersonDataActivity.class);
-			break;
-		case R.id.homepage_item3:
-			intent=new Intent(this,StatisticsActivity.class);
-			break;
-		case R.id.homepage_item4:
-			intent=new Intent(this,ExceptionRecordActivity.class);
-			break;
-			
-		default:
-			break;
-		}
+		
 
 	}
 

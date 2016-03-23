@@ -20,7 +20,7 @@ public class DatabaseHelper {
     }
     
    
-    //²éÑ¯µ½µÄ×ÜÊıÄ¿
+    //æŸ¥è¯¢åˆ°çš„æ€»æ•°ç›®
     public int getCount(String userId)
     {
     	SQLiteDatabase db = myDbHelp.getWritableDatabase();
@@ -35,16 +35,16 @@ public class DatabaseHelper {
 		return count;
     	
     }
-   //·ÖÒ³²éÑ¯
-    //HAATABLE ·ÖÒ³²éÑ¯ 10ĞĞÃ¿Ò³
+   //åˆ†é¡µæŸ¥è¯¢
+    //HAATABLE åˆ†é¡µæŸ¥è¯¢ 10è¡Œæ¯é¡µ
     public ArrayList<String> getAllItems(String userId,int currentPage, int pageSize) {
-    	//System.out.println("¿ªÊ¼·ÖÒ³²éÑ¯");
+    	//System.out.println("å¼€å§‹åˆ†é¡µæŸ¥è¯¢");
         int firstResult = (currentPage - 1) * pageSize;
         //System.out.println("firstResult:"+firstResult);
         //int maxResult = currentPage * pageSize;
         System.out.println("lineSize:"+pageSize);
         SQLiteDatabase db = myDbHelp.getWritableDatabase();
-        System.out.println("´ò¿ªÊı¾İ¿â");
+        System.out.println("æ‰“å¼€æ•°æ®åº“");
         String sql = "select * from "+MyDBHelp.HAATABLE+" where  objectId=?  order by HAAID limit ? offset ?";
         Cursor mCursor = db.rawQuery(
             sql,
@@ -52,12 +52,12 @@ public class DatabaseHelper {
             		
             		String.valueOf(pageSize),
             		String.valueOf(firstResult) });
-        System.out.println("·ÖÒ³²éÑ¯Íê³É"+mCursor.getCount());
+        System.out.println("åˆ†é¡µæŸ¥è¯¢å®Œæˆ"+mCursor.getCount());
         ArrayList<String> items = new ArrayList<String>();
        
         if(mCursor.getCount()==0)
         {
-        	Log.i("Ã»ÓĞ²éµ½Êı¾İ");
+        	Log.i("æ²¡æœ‰æŸ¥åˆ°æ•°æ®");
         }
         else
         {
@@ -66,7 +66,7 @@ public class DatabaseHelper {
         {
         	 String item = mCursor.getInt(0)+" | "+mCursor.getString(1)+" "+mCursor.getString(2)+" | "+mCursor.getFloat(3)+" | "+mCursor.getString(4);
              items.add(item);
-           //  System.out.println("·ÖÒ³²é:"+item);
+           //  System.out.println("åˆ†é¡µæŸ¥:"+item);
         }
         while(mCursor.moveToNext());
         }
@@ -91,13 +91,13 @@ public class DatabaseHelper {
     }
     
     public ArrayList<String> getExcptionItems(String userId,int currentPage, int pageSize) {
-    	//System.out.println("¿ªÊ¼·ÖÒ³²éÑ¯");
+    	//System.out.println("å¼€å§‹åˆ†é¡µæŸ¥è¯¢");
         int firstResult = (currentPage - 1) * pageSize;
         //System.out.println("firstResult:"+firstResult);
         //int maxResult = currentPage * pageSize;
 //        System.out.println("pageSize:"+pageSize);
         SQLiteDatabase db = myDbHelp.getWritableDatabase();
-//        System.out.println("´ò¿ªÊı¾İ¿â");
+//        System.out.println("æ‰“å¼€æ•°æ®åº“");
         String sql = "select * from "+MyDBHelp.EXCEPTIONTABLE+" where  objectId=?  order by EXCEPTIONID limit ? offset ?";
         Cursor mCursor = db.rawQuery(
             sql,
@@ -105,12 +105,12 @@ public class DatabaseHelper {
             		
             		String.valueOf(pageSize),
             		String.valueOf(firstResult) });
-        System.out.println("·ÖÒ³²éÑ¯Íê³É"+mCursor.getCount());
+        System.out.println("åˆ†é¡µæŸ¥è¯¢å®Œæˆ"+mCursor.getCount());
         ArrayList<String> items = new ArrayList<String>();
        
         if(mCursor.getCount()==0)
         {
-        	Log.i("Ã»ÓĞ²éµ½Êı¾İ");
+        	Log.i("æ²¡æœ‰æŸ¥åˆ°æ•°æ®");
         }
         else
         {
@@ -119,7 +119,7 @@ public class DatabaseHelper {
         {
         	 String item = mCursor.getInt(0)+" | "+mCursor.getString(1)+" "+mCursor.getString(2)+" | "+mCursor.getFloat(3)+" | "+mCursor.getString(4)+"|"+mCursor.getString(5);
              items.add(item);
-           //  System.out.println("·ÖÒ³²é:"+item);
+           //  System.out.println("åˆ†é¡µæŸ¥:"+item);
         }
         while(mCursor.moveToNext());
         }
@@ -134,7 +134,7 @@ public class DatabaseHelper {
     {
     	int [] sta_item=new int[]{0,0,0,0,0,0};
     	SQLiteDatabase db = myDbHelp.getWritableDatabase();
-        System.out.println("´ò¿ªÊı¾İ¿â");
+        System.out.println("æ‰“å¼€æ•°æ®åº“");
         String sql = "select * from "+MyDBHelp.STATISTICSTABLE+" where  objectId=? and saveDate= ?";
         Cursor mCursor = db.rawQuery(
             sql,
@@ -143,7 +143,7 @@ public class DatabaseHelper {
 
         if(mCursor.getCount()==0)
         {
-        	System.out.println("Ã»ÓĞ²éÑ¯µ½Êı¾İ");
+        	System.out.println("æ²¡æœ‰æŸ¥è¯¢åˆ°æ•°æ®");
         }
         else
         {

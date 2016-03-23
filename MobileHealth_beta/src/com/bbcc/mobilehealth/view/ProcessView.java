@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.bbcc.mobilehealth.R;
+import com.bbcc.mobilehealth.util.Constant;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -24,14 +25,14 @@ public class ProcessView extends View {
 	private int redColor = getResources().getColor(R.color.red);
 	private int greenColor = getResources().getColor(R.color.greenyellow);
 	private int purpleColor = getResources().getColor(R.color.purple);
-	private float radius = 10;
+	private float radius = 13;
 	private MyHandler handler = new MyHandler();
 
 	class MyHandler extends Handler {
 		@Override
 		public void handleMessage(Message msg) {
 			switch (msg.what) {
-			case 277:
+			case Constant.PROCESSVIEW_MSG:
 				invalidate();
 				break;
 
@@ -119,7 +120,7 @@ public class ProcessView extends View {
 			break;
 		}
 		if (task != null) {
-			task.cancel(); // 将原任务从队列中移除
+			task.cancel(); // 灏嗗師浠诲姟浠庨槦鍒椾腑绉婚櫎
 		}
 		task = new TimerTask() {
 			@Override
@@ -129,7 +130,7 @@ public class ProcessView extends View {
 					state = 1;
 				}
 				Message message = Message.obtain();
-				message.what = 277;
+				message.what = Constant.PROCESSVIEW_MSG;
 				handler.sendEmptyMessage(message.what);
 			}
 

@@ -20,14 +20,17 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaCodecInfo.CodecCapabilities;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -40,11 +43,13 @@ public class SignInActivity extends Activity implements OnClickListener {
 	private Button signIn_btn;
 	private TextView signUp_btn;
 	private int result;
+	
+	private ImageView bt_left;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.sign_in);
-		
+		initWindow();
 		result = getIntent().getIntExtra("result", -1);
 		initView();
 	}
@@ -54,7 +59,9 @@ public class SignInActivity extends Activity implements OnClickListener {
 		passwordEditText = (ClearEditText)findViewById(R.id.in_password);
 		signIn_btn = (Button)findViewById(R.id.in_sign_in);
 		signUp_btn = (TextView)findViewById(R.id.in_sign_up);
+		bt_left = (ImageView)findViewById(R.id.bt_left);
 		
+		bt_left.setOnClickListener(this);
 		signUp_btn.setOnClickListener(this);
 		signIn_btn.setOnClickListener(this);
 	}
@@ -149,10 +156,20 @@ public class SignInActivity extends Activity implements OnClickListener {
 				startActivity(new Intent(SignInActivity.this,SignUpActivity.class));
 				
 				break;
+				
+			case R.id.bt_left:
+				SignInActivity.this.finish();
+				break;
 			}
 		
-			
 		}
+	
+	private void initWindow() {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+			getWindow().addFlags(
+					WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+		}
+	}
 	
 	@Override
 	public void onBackPressed() {

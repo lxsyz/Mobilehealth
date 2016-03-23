@@ -32,9 +32,9 @@ public class MySimpleCursorAdapter extends SimpleAdapter {
 		{
 			view=super.getView(position, convertView, parent);
 		}
-		int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };//RGB颜色 
+		int[] colors = { Color.WHITE, Color.rgb(219, 238, 244) };//RGB棰滆壊 
 		   
-        view.setBackgroundColor(colors[position % 2]);// 每隔item之间颜色不同
+        view.setBackgroundColor(colors[position % 2]);// 姣忛殧item涔嬮棿棰滆壊涓嶅悓
 		return super.getView(position, convertView, parent);
 	}
 

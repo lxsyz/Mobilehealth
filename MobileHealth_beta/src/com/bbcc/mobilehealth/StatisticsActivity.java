@@ -88,7 +88,7 @@ public class StatisticsActivity extends Activity implements OnDateChangeListener
 		int sta_upCountTime=getItems[4];
 		int sta_downCountTime=getItems[5];
 		int allTime=sta_sitCountTime+sta_walkCountTime+sta_runCountTime+sta_upCountTime+sta_downCountTime;
-		sta_stepCount.setText(""+todayStep+"²½");
+		sta_stepCount.setText(""+todayStep+"æ­¥");
 		sta_sitCount.setText(""+getStaTime(sta_sitCountTime));
 		sta_walkCount.setText(""+getStaTime(sta_walkCountTime));
 		sta_runCount.setText(""+getStaTime(sta_runCountTime));
@@ -106,71 +106,71 @@ public class StatisticsActivity extends Activity implements OnDateChangeListener
 		int hoursMod=secAll%3600;
 		int minute=hoursMod/60;
 		int second=hoursMod%60;
-		timeStr=hours+"Ğ¡Ê±"+minute+"·ÖÖÓ"+second+"Ãë";
+		timeStr=hours+"å°æ—¶"+minute+"åˆ†é’Ÿ"+second+"ç§’";
 		return timeStr;
 		
 	}
-	//³õÊ¼»¯±ı×´Í¼
+	//åˆå§‹åŒ–é¥¼çŠ¶å›¾
 	public void initPieChar(PieChart pieChart, PieData pieData, String selectedDateStr, int todayStep)
 	{
 		    pieChar.setHoleColorTransparent(true);    
 		    
-	        pieChar.setHoleRadius(60f);  //°ë¾¶    
-	        pieChar.setTransparentCircleRadius(64f); // °ëÍ¸Ã÷È¦    
-	        //pieChart.setHoleRadius(0)  //ÊµĞÄÔ²    
+	        pieChar.setHoleRadius(60f);  //åŠå¾„    
+	        pieChar.setTransparentCircleRadius(64f); // åŠé€æ˜åœˆ    
+	        //pieChart.setHoleRadius(0)  //å®å¿ƒåœ†    
 	    
-	        pieChar.setDescription(selectedDateStr+" ×´Ì¬Ê±¼äÍ³¼Æ");    
+	        pieChar.setDescription(selectedDateStr+" çŠ¶æ€æ—¶é—´ç»Ÿè®¡");    
 	    
 	        // mChart.setDrawYValues(true);    
-	        pieChar.setDrawCenterText(true);  //±ı×´Í¼ÖĞ¼ä¿ÉÒÔÌí¼ÓÎÄ×Ö    
+	        pieChar.setDrawCenterText(true);  //é¥¼çŠ¶å›¾ä¸­é—´å¯ä»¥æ·»åŠ æ–‡å­—    
 	    
 	        pieChar.setDrawHoleEnabled(true);    
 	    
-	        pieChar.setRotationAngle(90); // ³õÊ¼Ğı×ª½Ç¶È    
+	        pieChar.setRotationAngle(90); // åˆå§‹æ—‹è½¬è§’åº¦    
 	    
 	        // draws the corresponding description value into the slice    
 	        // mChart.setDrawXValues(true);    
 	    
 	        // enable rotation of the chart by touch    
-	        pieChar.setRotationEnabled(true); // ¿ÉÒÔÊÖ¶¯Ğı×ª    
+	        pieChar.setRotationEnabled(true); // å¯ä»¥æ‰‹åŠ¨æ—‹è½¬    
 	    
 	        // display percentage values    
-	        pieChar.setUsePercentValues(true);  //ÏÔÊ¾³É°Ù·Ö±È    
+	        pieChar.setUsePercentValues(true);  //æ˜¾ç¤ºæˆç™¾åˆ†æ¯”    
 	     
 	    
-	        pieChar.setCenterText("½ñÈÕ¹²"+todayStep+"²½");  //±ı×´Í¼ÖĞ¼äµÄÎÄ×Ö    
+	        pieChar.setCenterText("ä»Šæ—¥å…±"+todayStep+"æ­¥");  //é¥¼çŠ¶å›¾ä¸­é—´çš„æ–‡å­—    
 	    
-	        //ÉèÖÃÊı¾İ    
+	        //è®¾ç½®æ•°æ®    
 	        pieChar.setData(pieData);     
 	            
 	   // undo all highlights    
 //	      pieChart.highlightValues(null);    
 //	      pieChart.invalidate();    
 	    
-	        Legend mLegend = pieChar.getLegend();  //ÉèÖÃ±ÈÀıÍ¼    
-	        mLegend.setPosition(LegendPosition.RIGHT_OF_CHART);  //×îÓÒ±ßÏÔÊ¾    
-//	      mLegend.setForm(LegendForm.LINE);  //ÉèÖÃ±ÈÀıÍ¼µÄĞÎ×´£¬Ä¬ÈÏÊÇ·½ĞÎ    
+	        Legend mLegend = pieChar.getLegend();  //è®¾ç½®æ¯”ä¾‹å›¾    
+	        mLegend.setPosition(LegendPosition.RIGHT_OF_CHART);  //æœ€å³è¾¹æ˜¾ç¤º    
+//	      mLegend.setForm(LegendForm.LINE);  //è®¾ç½®æ¯”ä¾‹å›¾çš„å½¢çŠ¶ï¼Œé»˜è®¤æ˜¯æ–¹å½¢    
 	        mLegend.setXEntrySpace(7f);    
 	        mLegend.setYEntrySpace(5f);    
 	            
-	        pieChar.animateXY(1000, 1000);  //ÉèÖÃ¶¯»­    
+	        pieChar.animateXY(1000, 1000);  //è®¾ç½®åŠ¨ç”»    
 	        // mChart.spin(2000, 0, 360);    
 	}
 	private PieData getPieData(int count, float allTime, int sta_sitCountTime, int sta_walkCountTime, int sta_runCountTime, int sta_upCountTime, int sta_downCountTime) {    
         
-        ArrayList<String> xValues = new ArrayList<String>();  //xValsÓÃÀ´±íÊ¾Ã¿¸ö±ı¿éÉÏµÄÄÚÈİ    
+        ArrayList<String> xValues = new ArrayList<String>();  //xValsç”¨æ¥è¡¨ç¤ºæ¯ä¸ªé¥¼å—ä¸Šçš„å†…å®¹    
     
          
-       xValues.add("¾²Ö¹Ê±¼ä");  //±ı¿éÉÏÏÔÊ¾³É   
-       xValues.add("ĞĞ×ßÊ±¼ä");
-       xValues.add("ÅÜ²½Ê±¼ä");
-       xValues.add("ÉÏÂ¥Ê±¼ä");
-       xValues.add("ÏÂÂ¥Ê±¼ä");
+       xValues.add("é™æ­¢æ—¶é—´");  //é¥¼å—ä¸Šæ˜¾ç¤ºæˆ   
+       xValues.add("è¡Œèµ°æ—¶é—´");
+       xValues.add("è·‘æ­¥æ—¶é—´");
+       xValues.add("ä¸Šæ¥¼æ—¶é—´");
+       xValues.add("ä¸‹æ¥¼æ—¶é—´");
           
     
-        ArrayList<Entry> yValues = new ArrayList<Entry>();  //yValsÓÃÀ´±íÊ¾·â×°Ã¿¸ö±ı¿éµÄÊµ¼ÊÊı¾İ    
+        ArrayList<Entry> yValues = new ArrayList<Entry>();  //yValsç”¨æ¥è¡¨ç¤ºå°è£…æ¯ä¸ªé¥¼å—çš„å®é™…æ•°æ®    
     
-        // ±ıÍ¼Êı¾İ    
+        // é¥¼å›¾æ•°æ®    
         /**  
          
          */ 
@@ -185,13 +185,13 @@ public class StatisticsActivity extends Activity implements OnDateChangeListener
         yValues.add(new Entry(quarterly4, 3));    
         yValues.add(new Entry(quarterly5, 4)); 
     
-        //yÖáµÄ¼¯ºÏ    
-        PieDataSet pieDataSet = new PieDataSet(yValues, ""/*ÏÔÊ¾ÔÚ±ÈÀıÍ¼ÉÏ*/);    
-        pieDataSet.setSliceSpace(0f); //ÉèÖÃ¸ö±ı×´Í¼Ö®¼äµÄ¾àÀë    
+        //yè½´çš„é›†åˆ    
+        PieDataSet pieDataSet = new PieDataSet(yValues, ""/*æ˜¾ç¤ºåœ¨æ¯”ä¾‹å›¾ä¸Š*/);    
+        pieDataSet.setSliceSpace(0f); //è®¾ç½®ä¸ªé¥¼çŠ¶å›¾ä¹‹é—´çš„è·ç¦»    
     
         ArrayList<Integer> colors = new ArrayList<Integer>();    
     
-        // ±ıÍ¼ÑÕÉ«    
+        // é¥¼å›¾é¢œè‰²    
         colors.add(Color.rgb(250, 160, 147));    
         colors.add(Color.rgb(79, 229, 254));    
         colors.add(Color.rgb(119, 223, 9));    
@@ -201,7 +201,7 @@ public class StatisticsActivity extends Activity implements OnDateChangeListener
     
         DisplayMetrics metrics = getResources().getDisplayMetrics();    
         float px = 5 * (metrics.densityDpi / 160f);    
-        pieDataSet.setSelectionShift(px); // Ñ¡ÖĞÌ¬¶à³öµÄ³¤¶È    
+        pieDataSet.setSelectionShift(px); // é€‰ä¸­æ€å¤šå‡ºçš„é•¿åº¦    
     
         PieData pieData = new PieData(xValues, pieDataSet);    
             

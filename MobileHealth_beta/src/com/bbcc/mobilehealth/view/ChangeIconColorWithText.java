@@ -29,8 +29,8 @@ public class ChangeIconColorWithText extends View {
 	private Bitmap mBitmap;
 	private Paint mPaint;
 	private float mAlpha;
-	private Rect mIconRect;//icon邊界
-	private Rect mTextBound;//文本邊界
+	private Rect mIconRect;//icon閭婄晫
+	private Rect mTextBound;//鏂囨湰閭婄晫
 	private Paint mTextPaint;//wenben
     private static final String INSTANCE_STATE="instance_state";
     private static final String STATE_ALPHA="STATE_ALPHA";
@@ -38,16 +38,16 @@ public class ChangeIconColorWithText extends View {
 		this(context, null);
 		// TODO Auto-generated constructor stub
 	}
-//取值
+//鍙栧��
 	public ChangeIconColorWithText(Context context, AttributeSet attrs,
 			int defStyleAttr) {
 		super(context, attrs, defStyleAttr);
 		TypedArray a = context
-				.obtainStyledAttributes(attrs,R.styleable.ChangeIconColorWithText);//ChangeIconColorWithText的所有属性
+				.obtainStyledAttributes(attrs,R.styleable.ChangeIconColorWithText);//ChangeIconColorWithText鐨勬墍鏈夊睘鎬�
 		int n = a.getIndexCount();
 		for (int i = 0; i < n; i++) {
 			int attr = a.getIndex(i);
-			switch (attr) {//取出属性值
+			switch (attr) {//鍙栧嚭灞炴�у��
 			case R.styleable.ChangeIconColorWithText_icon:
 				BitmapDrawable drawable = (BitmapDrawable) a.getDrawable(attr);//icon
 			
@@ -62,14 +62,14 @@ public class ChangeIconColorWithText extends View {
 			case R.styleable.ChangeIconColorWithText_text_size://textsize
 				mSize = (int) a.getDimension(attr, TypedValue.applyDimension(
 						TypedValue.COMPLEX_UNIT_SP, 12, getResources()
-								.getDisplayMetrics()));//sp转化
+								.getDisplayMetrics()));//sp杞寲
 				break;
 			}
 		}
 		// TODO Auto-generated constructor stub
 		a.recycle();//
 		
-		mTextBound = new Rect();//矩形
+		mTextBound = new Rect();//鐭╁舰
 		mTextPaint = new Paint();
 		mTextPaint.setTextSize(mSize);
 		mTextPaint.setColor(0xff555555);
@@ -77,14 +77,14 @@ public class ChangeIconColorWithText extends View {
 	}
 
 	@Override
-	//设置宽和高
+	//璁剧疆瀹藉拰楂�
 	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
 		// TODO Auto-generated method stub
 		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		int iconWidth = Math.min(getMeasuredWidth() - getPaddingLeft()//icon寬度
+		int iconWidth = Math.min(getMeasuredWidth() - getPaddingLeft()//icon瀵害
 				- getPaddingRight(), getMeasuredHeight() - getPaddingTop()
 				- getPaddingBottom() - mTextBound.height());
-		int left=(getMeasuredWidth()-iconWidth)/2;//左上角
+		int left=(getMeasuredWidth()-iconWidth)/2;//宸︿笂瑙�
 		int top=(getMeasuredHeight()-iconWidth-mTextBound.height())/2;
 		mIconRect=new Rect(left,top,left+iconWidth,top+iconWidth);//juxing
 	}
@@ -145,7 +145,7 @@ private void drawSourceText(Canvas canvas,int alpha) {
 		canvas.drawText(mText, x, y, mTextPaint);
 	}
 
-//缁樺埗鍙彉鑹茬殑Icon
+//缂佹ê鍩楅崣顖氬綁閼硅尙娈慖con
 	private void setupTargetBitmap(int alpha) {
 		// TODO Auto-generated method stub
 		mBitmap=Bitmap.createBitmap(getMeasuredWidth(), getMeasuredHeight(), Config.ARGB_8888);
@@ -174,7 +174,7 @@ private void drawSourceText(Canvas canvas,int alpha) {
 		invalidateView();
 	}
 
-//閲嶇粯
+//闁插秶绮�
 	private void invalidateView()
 	{
 		if (Looper.getMainLooper() == Looper.myLooper())

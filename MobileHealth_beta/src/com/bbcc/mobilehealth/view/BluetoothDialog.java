@@ -90,7 +90,7 @@ public class BluetoothDialog extends Dialog implements
 			if (!mBluetoothAdapter.isEnabled()) {
 				mBluetoothAdapter.enable();
 				isOpen=true;
-				bluetoothDialogListener.callBack(isOpen);
+//				bluetoothDialogListener.callBack(isOpen);
 			}
 		}
 
